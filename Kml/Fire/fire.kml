@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>fair.kml</name>
+	<Schema name="fire" id="fire">
+		<SimpleField type="int" name="FID"></SimpleField>
+		<SimpleField type="int" name="Id"></SimpleField>
+	</Schema>
+	<Style id="sn_ylw-pushpin">
+		<LineStyle>
+			<color>7f6e6e6e</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>990000ff</color>
+			<outline>0</outline>
+		</PolyStyle>
+	</Style>
+	<Placemark id="kml_10">
+		<name>kml_10</name>
+		<Snippet maxLines="0"></Snippet>
+		<description><![CDATA[<center><table><tr><th colspan='2' align='center'><em>Attributes</em></th></tr><tr bgcolor="#E3E3F3">
+<th>FID</th>
+<td>0</td>
+</tr><tr bgcolor="">
+<th>Id</th>
+<td>0</td>
+</tr></table></center>]]></description>
+		<styleUrl>#sn_ylw-pushpin</styleUrl>
+		<ExtendedData>
+			<SchemaData schemaUrl="#fire">
+				<SimpleData name="FID">0</SimpleData>
+				<SimpleData name="Id">0</SimpleData>
+			</SchemaData>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						31.7355883367449,58.4646017564582,0 31.7358687619952,58.4646017564582,0 31.7360472144273,58.4646017564582,0 31.7362893998707,58.4646017564582,0 31.7364168658935,58.4645762632537,0 31.736518838712,58.46448703703749,0 31.7366080649279,58.4643468244124,0 31.7366972911438,58.4641301321735,0 31.7366972911438,58.4639134399346,0 31.7367227843485,58.46386245352559,0 31.7367610241554,58.4637732273096,0 31.7367737707577,58.4636712544911,0 31.7367227843485,58.4636202680821,0 31.7365443319165,58.4635947748774,0 31.7363658794845,58.4636075214797,0 31.7363021464731,58.4636840010935,0 31.7361874270524,58.463836960321,0 31.7362129202569,58.464015412753,0 31.7360854542342,58.4640918923666,0 31.7359197484045,58.46414287877591,0 31.73575404257461,58.4642066117872,0 31.7355628435402,58.4642448515941,0 31.7354226309153,58.4644997836399,0 31.7354863639267,58.4645762632537,0 31.7355883367449,58.4646017564582,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

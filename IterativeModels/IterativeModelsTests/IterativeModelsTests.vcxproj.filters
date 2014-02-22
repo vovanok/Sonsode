@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ModelTests">
+      <UniqueIdentifier>{01c9a1c4-84f8-4189-8807-e730d8dc6d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{47de7241-a2e7-4773-9e12-cb4327cedceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Init">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AirFlowDistributionModelTest.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="FireSpreadSimpleModelTest.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="HeatConductivity3DModelTest.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="InitRoutines.h">
+      <Filter>Init</Filter>
+    </ClInclude>
+    <ClInclude Include="OilSpillageImprovedModelTest.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="CuTests.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="CapacityTests.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="HeatConductivity2DModelTest.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="FireKmlVisualizator.h" />
+    <ClInclude Include="OilKmlVisualizator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="InitRoutines.cpp">
+      <Filter>Init</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CapacityTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="CuTests.cu">
+      <Filter>Tests</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="CUDA_5_5|Win32">
+      <Configuration>CUDA_5_5</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B943791B-D3AD-4227-8170-DD06591A7010}</ProjectGuid>
+    <RootNamespace>IterativeModelsTests</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 5.5.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\CommonLibs\IterativeModeling;..\..\CommonLibs\DataCalculation;..\..\CommonLibs\DataVisualization;..\..\CommonLibs\UnitedUtils;$(CUDA_PATH)\include;..\CuAirFlowDistributionModel;..\CuFireSpread3DModel;..\CuFireSpreadSimpleModel;..\CuHeatConductivity3DModel;..\CuHeatConductivityModel;..\CuOilSpillageModel;..\CuParticlesModel;..\HeatConductivitySweepModel;..\CuOilSpillageImprovedModel;..\Model_Experimental;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;$(CUDA_PATH)\lib\Win32;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>IterativeModeling.lib;DataCalculation.lib;DataVisualization.lib;UnitedUtils.lib;cudart.lib;CuAirFlowDistributionModel.lib;CuFireSpreadSimpleModel.lib;CuHeatConductivity3DModel.lib;CuHeatConductivityModel.lib;CuOilSpillageImprovedModel.lib;</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\External;..\..\CommonLibs\IterativeModeling;..\..\CommonLibs\DataCalculation;..\..\CommonLibs\DataVisualization;..\..\CommonLibs\UnitedUtils;$(CUDA_PATH)\include;..\CuAirFlowDistributionModel;..\CuFireSpread3DModel;..\CuFireSpreadSimpleModel;..\CuHeatConductivity3DModel;..\CuHeatConductivityModel;..\CuOilSpillageModel;..\CuParticlesModel;..\HeatConductivitySweepModel;..\CuOilSpillageImprovedModel;..\Model_Experimental;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;$(CUDA_PATH)\lib\Win32;..\..\External;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>IterativeModeling.lib;DataCalculation.lib;DataVisualization.lib;UnitedUtils.lib;cudart.lib;CuAirFlowDistributionModel.lib;CuFireSpreadSimpleModel.lib;CuHeatConductivity3DModel.lib;CuHeatConductivityModel.lib;CuOilSpillageImprovedModel.lib;tinyxml.lib;</AdditionalDependencies>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_11,sm_11</CodeGeneration>
+      <Include>..\..\External;</Include>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="AirFlowDistributionModelTest.h" />
+    <ClInclude Include="CuTests.h" />
+    <ClInclude Include="FireKmlVisualizator.h" />
+    <ClInclude Include="FireSpreadSimpleModelTest.h" />
+    <ClInclude Include="HeatConductivity3DModelTest.h" />
+    <ClInclude Include="HeatConductivity2DModelTest.h" />
+    <ClInclude Include="InitRoutines.h" />
+    <ClInclude Include="OilKmlVisualizator.h" />
+    <ClInclude Include="OilSpillageImprovedModelTest.h" />
+    <ClInclude Include="Tests.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CapacityTests.h" />
+    <ClCompile Include="InitRoutines.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CapacityTests.cpp" />
+    <ClCompile Include="Tests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="CuTests.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_11,sm_11</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">compute_11,sm_11</CodeGeneration>
+      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</Include>
+      <Include Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">%(AdditionalIncludeDirectories)</Include>
+    </CudaCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 5.5.targets" />
+  </ImportGroup>
+</Project>

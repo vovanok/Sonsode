@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Style id="style0">
+      <LineStyle>
+        <color>640000FF</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>640000FF</color>
+        <outline>3</outline>
+        <fill>1</fill>
+      </PolyStyle>
+    </Style>
+    <Folder>
+      <name>forecast</name>
+      <Placemark>
+        <name>forecast</name>
+        <description><![CDATA[Shape_Length = 0.0153238<br>Shape_Area = 1.16696<br>]]></description>
+        <styleUrl>#style0</styleUrl>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="OilSpillageImprovedModel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="OilSpillageImprovedModelFunctors.cu" />
+    <CudaCompile Include="OilSpillageImprovedModel.cu" />
+    <CudaCompile Include="OilSpillageImprovedModelPodTypes.cu" />
+  </ItemGroup>
+</Project>

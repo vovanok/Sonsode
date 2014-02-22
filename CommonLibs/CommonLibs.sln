@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitedUtils", "UnitedUtils\UnitedUtils.vcxproj", "{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonLibsTest", "UnitedUtilsTest\UnitedUtilsTest.vcxproj", "{67103A67-9C74-48F7-962E-ADBCE5E597AA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D735E4D-7B84-4500-87D3-662E498DAAE7} = {1D735E4D-7B84-4500-87D3-662E498DAAE7}
+		{08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE} = {08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE}
+		{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF} = {E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}
+		{83F112EF-068E-493E-AAF3-F903D161A512} = {83F112EF-068E-493E-AAF3-F903D161A512}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataVisualization", "DataVisualization\DataVisualization.vcxproj", "{08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataCalculation", "DataCalculation\DataCalculation.vcxproj", "{1D735E4D-7B84-4500-87D3-662E498DAAE7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IterativeModeling", "IterativeModeling\IterativeModeling.vcxproj", "{83F112EF-068E-493E-AAF3-F903D161A512}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D735E4D-7B84-4500-87D3-662E498DAAE7} = {1D735E4D-7B84-4500-87D3-662E498DAAE7}
+		{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF} = {E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}.Debug|Win32.Build.0 = Debug|Win32
+		{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}.Release|Win32.ActiveCfg = Release|Win32
+		{E31DFC75-0BE4-47A7-873B-C8D269D7BCEF}.Release|Win32.Build.0 = Release|Win32
+		{67103A67-9C74-48F7-962E-ADBCE5E597AA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{67103A67-9C74-48F7-962E-ADBCE5E597AA}.Debug|Win32.Build.0 = Debug|Win32
+		{67103A67-9C74-48F7-962E-ADBCE5E597AA}.Release|Win32.ActiveCfg = Release|Win32
+		{67103A67-9C74-48F7-962E-ADBCE5E597AA}.Release|Win32.Build.0 = Release|Win32
+		{08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE}.Debug|Win32.Build.0 = Debug|Win32
+		{08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE}.Release|Win32.ActiveCfg = Release|Win32
+		{08D9B45C-ADAA-48DE-A6BD-8A27A77C74AE}.Release|Win32.Build.0 = Release|Win32
+		{1D735E4D-7B84-4500-87D3-662E498DAAE7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1D735E4D-7B84-4500-87D3-662E498DAAE7}.Debug|Win32.Build.0 = Debug|Win32
+		{1D735E4D-7B84-4500-87D3-662E498DAAE7}.Release|Win32.ActiveCfg = Release|Win32
+		{1D735E4D-7B84-4500-87D3-662E498DAAE7}.Release|Win32.Build.0 = Release|Win32
+		{83F112EF-068E-493E-AAF3-F903D161A512}.Debug|Win32.ActiveCfg = Debug|Win32
+		{83F112EF-068E-493E-AAF3-F903D161A512}.Debug|Win32.Build.0 = Debug|Win32
+		{83F112EF-068E-493E-AAF3-F903D161A512}.Release|Win32.ActiveCfg = Release|Win32
+		{83F112EF-068E-493E-AAF3-F903D161A512}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
