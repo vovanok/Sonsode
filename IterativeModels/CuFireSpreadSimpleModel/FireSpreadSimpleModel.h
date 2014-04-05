@@ -9,8 +9,7 @@
 #include "DeviceData.cu"
 #include "Vectors.hpp"
 #include "FireSpreadSimpleModelPodTypes.cu"
-
-#define BLOCK_SIZE_FSSM 4
+#include "FireSpreadSimpleModelFunctors.cu"
 
 using Sonsode::HostData1D;
 using Sonsode::HostData2D;
@@ -21,6 +20,8 @@ using Sonsode::FunctionsLib::ExplicitGaussSeidel_2D_CPU;
 using Sonsode::FunctionsLib::ExplicitGaussSeidel_2D_GPU_direct;
 using Sonsode::FunctionsLib::ImplicitSweep_2D_CPU;
 using Sonsode::FunctionsLib::ImplicitSweep_2D_GPU_lineDivide;
+using Sonsode::FunctionsLib::FullSearch_2D_CPU;
+using Sonsode::FunctionsLib::FullSearch_2D_GPU;
 
 class FireSpreadSimpleModel : public IterativeModel {
 public:
@@ -28,49 +29,28 @@ public:
 	virtual void SynchronizeWithGpu();
 
 	FireSpreadSimpleModel(FireSpreadConsts consts, FireSpreadDataH data);
-	virtual ~FireSpreadSimpleModel() {
-		GpuOff();
-		_data.Erase();
-		lx.Erase();
-		ly.Erase();
-	}
+	virtual ~FireSpreadSimpleModel();
 
 protected:
-	FireSpreadConsts _consts;
-
 	FireSpreadDataH _data;
 	FireSpreadDataD _data_dev;
+
+	FireSpreadConsts _consts;
+
+	HostData2D<SweepFactors<float>> sf_h;
+	DeviceData2D<SweepFactors<float>> sf_d;
 	
-	float hh;
-	Vector2D<float> u; //Вспом перем = windU * cos(windAngle) и windU * sin(windAngle)
-	float ap; //Вспом перем = m2/hh
-	float r0; //Вспом перем = 1/h
+	FireSpreadFunctor::T4<FireSpreadDataH> t4CPU;
+	FireSpreadFunctor::Gorenie<FireSpreadDataH> gorenieCPU;
+	FireSpreadFunctor::Temperature<FireSpreadDataH> temperatureCPU;
 
-	HostData1D<float> lx;
-	HostData1D<float> ly;
-
-	DeviceData1D<float> lx_dev;
-	DeviceData1D<float> ly_dev;
+	FireSpreadFunctor::T4<FireSpreadDataD> t4GPU;
+	FireSpreadFunctor::Gorenie<FireSpreadDataD> gorenieGPU;
+	FireSpreadFunctor::Temperature<FireSpreadDataD> temperatureGPU;
 
 	void CalculationMethod_CPU();
 	void CalculationMethod_GPU();
 
 	virtual void PrepareDataForGpu(const Sonsode::GpuDevice &gpu, size_t orderNumber);
 	virtual void FreeDataForGpus();
-
-	//Запуск ядра вычиления противоточных производных
-	void Run_Kernel_FireSpreadSimpleModel_CounterflowDerivative(FireSpreadDataD data_dev,
-		Vector2D<float> u, float r0, float danu, float hh);
-
-	//Запуск ядра прогонки вдоль оси X
-	void Run_Kernel_FireSpreadSimpleModel_RunAroundX(FireSpreadDataD data_dev,
-		DeviceData1D<float> ly, float ap, float tau);
-
-	//Запуск ядра прогонки вдоль оси Y
-	void Run_Kernel_FireSpreadSimpleModel_RunAroundY(FireSpreadDataD data_dev,
-		DeviceData1D<float> lx, float ap, float tau);
-
-	//Запуск ядра вычисления температур после горения
-	void Run_Kernel_FireSpreadSimpleModel_Fire(FireSpreadDataD data_dev,
-		float temKr, float qbig, int mstep, float tzv, float tau, float qlitl, float ks, float vlag);
 };

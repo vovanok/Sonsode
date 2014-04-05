@@ -4,10 +4,8 @@
     <ClInclude Include="FireSpreadSimpleModel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FireSpreadSimpleModel.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="FireSpreadSimpleModelCuda.cu" />
     <CudaCompile Include="FireSpreadSimpleModelPodTypes.cu" />
+    <CudaCompile Include="FireSpreadSimpleModelFunctors.cu" />
+    <CudaCompile Include="FireSpreadSimpleModel.cu" />
   </ItemGroup>
 </Project>

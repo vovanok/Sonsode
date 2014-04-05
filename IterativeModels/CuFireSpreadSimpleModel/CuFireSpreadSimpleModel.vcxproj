@@ -138,12 +138,12 @@
     <ClInclude Include="FireSpreadSimpleModel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FireSpreadSimpleModel.cpp" />
+    <CudaCompile Include="FireSpreadSimpleModel.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="FireSpreadSimpleModelCuda.cu">
-      <FileType>Document</FileType>
-    </CudaCompile>
+    <CudaCompile Include="FireSpreadSimpleModelFunctors.cu" />
     <CudaCompile Include="FireSpreadSimpleModelPodTypes.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

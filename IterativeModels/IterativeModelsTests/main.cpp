@@ -52,17 +52,17 @@ void main(int argc, char ** argv) {
 
 	//CapacityTests::FireSpreadRealAndModelTimeRelation(3600, 600, 500, 500, 100, "cpu");
 	//CapacityTests::FireSpreadRealAndModelTimeRelation(3600, 600, 400, 500, 100, "gpu");
-	//CapacityTests::OilSpillageRealAndModelTimeRelation(3600, 600, 100, 500, 100, "gpu");
+	//CapacityTests::OilSpillageRealAndModelTimeRelation(3600, 600, 100, 400, 100, "gpu");
 	//CapacityTests::OilSpillageRealAndModelTimeRelation(3600, 600, 300, 400, 100, "cpu");
 
 	//CapacityTests::AirFlow(10, 50, 190, 10, "cpu");
 	//CapacityTests::AirFlow(10, 150, 190, 10, "gpu");
 
-	//StartUiApp(argc, argv);
+	StartUiApp(argc, argv);
 
 	//Working with KML
 	//ForestFireKml(argc, argv);
-	OilSpillageKml(argc, argv);
+	//OilSpillageKml(argc, argv);
 	
 	std::cout << "Нажмите любую клавишу для продолжения..." << std::endl;
 	std::cin.get();
@@ -291,8 +291,7 @@ Geometry::Rect<float> MeterClearenceByGradusArea(const Geometry::Rect<float>& gr
 	float earthC = 2.0f * PI * EARTH_RADIUS;
 	Geometry::Point<float> oneGradInKm(
 		1000.0f * (earthC * cosf(LattitudeCloserEquator(gradusArea.point1.y, gradusArea.point2.y) * (PI / 180.0f))) / 360.0f,
-		1000.0f * (earthC / 360.0f)
-		);
+		1000.0f * (earthC / 360.0f));
 
 	result.point2.x = abs(gradusArea.point1.x - gradusArea.point2.x) * oneGradInKm.x;// * 2.0f;
 	result.point2.y = abs(gradusArea.point1.y - gradusArea.point2.y) * oneGradInKm.y;// * 2.0f;
@@ -323,8 +322,8 @@ std::string ForecastKmlFileName() {
 
 	ss << "forecast_" 
 		<< now->tm_mday << "_"
-		<< (now->tm_mon + 1) << "_"
-		<< (now->tm_year + 1900) << "_"
+		<< now->tm_mon + 1 << "_"
+		<< now->tm_year + 1900 << "_"
 		<< now->tm_hour << "_"
 		<< now->tm_min << "_"
 		<< now->tm_sec << ".kml";
@@ -349,6 +348,8 @@ std::vector<Region> GetForestFireForecast(const FireSpreadConsts& consts,
 	
 	size_t dimX = (size_t)((meterForestClearence.point2.x - meterForestClearence.point1.x) / consts.H);
 	size_t dimY = (size_t)((meterForestClearence.point2.y - meterForestClearence.point1.y) / consts.H);
+
+	std::cout << "dimX = " << dimX << "; dimY = " << dimY << std::endl;
 
 	FireSpreadDataH data(dimX, dimY);
 	HostData2D<bool> forestDiscreteGrid(dimX, dimY), fireDiscreteGrid(dimX, dimY);
@@ -479,6 +480,8 @@ std::vector<Region> GetOilSpillageForecast(const OilSpillageConsts& consts,
 
 	size_t dimX = (size_t)((meterWaterClearence.point2.x - meterWaterClearence.point1.x) / consts.H);
 	size_t dimY = (size_t)((meterWaterClearence.point2.y - meterWaterClearence.point1.y) / consts.H);
+
+	std::cout << "dimX = " << dimX << "; dimY = " << dimY << std::endl;
 
 	OilSpillageDataH data(dimX, dimY);
 	//!!!

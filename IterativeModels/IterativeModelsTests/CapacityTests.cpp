@@ -185,7 +185,7 @@ namespace CapacityTests {
 	}
 
 
-	void FireSpreadRealAndModelTimeRelation(size_t maxModelingTimeSec, size_t modelingTimeStepSec,
+	void FireSpreadRealAndModelTimeRelation(size_t maxRealTimeSec, size_t stepRealTimeSec,
 			size_t startDim, size_t finishDim, size_t stepDim, std::string methodName) {
 		
 		double iterationTime;
@@ -200,16 +200,16 @@ namespace CapacityTests {
 			std::cout << dim << "x" << dim;
 
 			float calculationTime = 0.0f;
-			float nextModelingTimeFrontier = modelingTimeStepSec;
+			float nextModelingTimeFrontier = stepRealTimeSec;
 
-			while (model->currentTime() <= maxModelingTimeSec) {
+			while (model->currentTime() <= maxRealTimeSec) {
 				try {
 					model->NextIteration(methodName, iterationTime, iterationNumber);
 					calculationTime += iterationTime;
 
 					if (model->currentTime() >= nextModelingTimeFrontier) {
 						std::cout << " " << std::fixed << std::setprecision(4) << calculationTime;
-						nextModelingTimeFrontier += modelingTimeStepSec;
+						nextModelingTimeFrontier += stepRealTimeSec;
 					}
 				} catch(std::string e) {
 					std::cout << std::endl << e << std::endl;

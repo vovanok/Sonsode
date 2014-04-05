@@ -1,6 +1,7 @@
 #pragma once
 
 #include "HostData.hpp"
+#include "Vectors.hpp"
 #include "DeviceData.cu"
 
 using Sonsode::HostData3D;
@@ -25,6 +26,11 @@ struct FireSpreadConsts {
 	float Ks; //?
 	float EnviromentTemperature; //Температура окружающей среды
 
+	float Hh;
+	float Ap;
+	Vector2D<float> WindU;
+	float R0;
+
 	FireSpreadConsts()
 		: H(0.0f), Tau(0.0f), Humidity(0.0f), WindAngle(0.0f), WindSpeed(0.0f),
 			M2(0.0f), Danu(0.0f), TemOnBounds(0.0f), IterFireBeginNum(0), Qbig(0.0f), Mstep(0), 
@@ -35,7 +41,14 @@ struct FireSpreadConsts {
 									 int mstep, float tzv, float temKr, float qlitl, float ks, float enviromentTemperature)
 		: H(h), Tau(tau), Humidity(humidity), WindAngle(windAngle), WindSpeed(windSpeed), M2(m2),
 			Danu(danu), TemOnBounds(temOnBounds), IterFireBeginNum(iterFireBeginNum), Qbig(qbig), Mstep(mstep),
-			Tzv(tzv), TemKr(temKr), Qlitl(qlitl), Ks(ks), EnviromentTemperature(enviromentTemperature) { }
+			Tzv(tzv), TemKr(temKr), Qlitl(qlitl), Ks(ks), EnviromentTemperature(enviromentTemperature) {
+
+		Hh = pow(h, 2.0f);
+		Ap = m2 / Hh;
+		WindU.x = windSpeed * cos(windAngle);
+		WindU.y = windSpeed * sin(windAngle);
+		R0 = 1.0f / h;
+	}
 };
 
 class FireSpreadDataH {
@@ -47,7 +60,7 @@ public:
 
 	FireSpreadDataH() { }
 	FireSpreadDataH(size_t dimX, size_t dimY)
-		: data(HostData3D<float>(dimX, dimY, 5)) { }
+		: data(HostData3D<float>(dimX, dimY, 3)) { }
 
 	void Erase() { data.Erase(); }
 	void Fill(float value) { data.Fill(value); }
@@ -55,8 +68,6 @@ public:
 	float& t(size_t x, size_t y) { return data(x, y, 0); }
 	float& roFuel(size_t x, size_t y) { return data(x, y, 1); }
 	float& t4(size_t x, size_t y) { return data(x, y, 2); }
-	float& q4(size_t x, size_t y) { return data(x, y, 3); }
-	float& m(size_t x, size_t y) { return data(x, y, 4); }
 
 private:
 	HostData3D<float> data;
@@ -69,9 +80,6 @@ public:
 
 	__host__ __device__ FireSpreadDataD() { }
 
-	/*FireSpreadDataD(const GpuDevice& gpu, size_t dimX, size_t dimY)
-		: data(DeviceData3D<float>(gpu, dimX, dimY, 5)) { }*/
-
 	FireSpreadDataD(const GpuDevice& gpu, FireSpreadDataH hostData)
 		: data(DeviceData3D<float>(gpu, hostData.data)) { }
 
@@ -82,8 +90,6 @@ public:
 	__device__ float& t(size_t x, size_t y) { return data(x, y, 0); }
 	__device__ float& roFuel(size_t x, size_t y) { return data(x, y, 1); }
 	__device__ float& t4(size_t x, size_t y) { return data(x, y, 2); }
-	__device__ float& q4(size_t x, size_t y) { return data(x, y, 3); }
-	__device__ float& m(size_t x, size_t y) { return data(x, y, 4); }
 
 	GpuDevice& gpu() const { return data.gpu(); }
 
