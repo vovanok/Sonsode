@@ -19,6 +19,19 @@
 #include "FireKmlVisualizator.h"
 #include "OilKmlVisualizator.h"
 
+using namespace DataVisualization;
+using namespace DataVisualization::Graphic;
+using namespace DataVisualization::Geometry;
+using namespace OilSpill;
+using namespace ForestFire;
+
+//using DataVisualization::Graphic::GraphicMgr;
+//using DataVisualization::Geometry::Point;
+//using DataVisualization::Geometry::Rect;
+//using DataVisualization::Graphic::CameraRotateDirection;
+//using DataVisualization::Graphic::CameraZoomDirection;
+//using DataVisualization::Geometry::Vectorizator;
+
 IterativeModel *model;
 GraphicMgr* grEngine = 0;
 void CloseApplication();
@@ -139,9 +152,7 @@ BOOL WINAPI ConsoleHandler(DWORD CEvent) {
     return TRUE;
 }
 
-void GetButtonForManageIteration(
-		size_t methodOrderNum, std::string& singleIterationButton, std::string& processIterationsButton) {
-
+void GetButtonForManageIteration(size_t methodOrderNum, std::string& singleIterationButton, std::string& processIterationsButton) {
 	switch(methodOrderNum) {
 		case 0:
 			singleIterationButton = "1";
@@ -263,10 +274,10 @@ float HoursToSeconds(float hours) {
 	return hours * (float)SECONDS_IN_HOUR;
 }
 
-Geometry::Rect<float> GetRegionsClearence(const std::vector<Region>& regions) {
-	Geometry::Rect<float> result = regions[0].GetClearanceBorders();
+Rect<float> GetRegionsClearence(const vector<Region>& regions) {
+	Rect<float> result = regions[0].GetClearanceBorders();
 
-	Geometry::Rect<float> curClearence;
+	Rect<float> curClearence;
 	for (Region region : regions) {
 		curClearence = region.GetClearanceBorders();
 		
@@ -285,11 +296,11 @@ float LattitudeCloserEquator(float latitude1, float latitude2) {
 	return latitude2;
 }
 
-Geometry::Rect<float> MeterClearenceByGradusArea(const Geometry::Rect<float>& gradusArea) {
-	Geometry::Rect<float> result(Geometry::Point<float>(0.0f, 0.0f), Geometry::Point<float>(0.0f, 0.0f));
+Rect<float> MeterClearenceByGradusArea(const Rect<float>& gradusArea) {
+	Rect<float> result(Point<float>(0.0f, 0.0f), Point<float>(0.0f, 0.0f));
 
 	float earthC = 2.0f * PI * EARTH_RADIUS;
-	Geometry::Point<float> oneGradInKm(
+	Point<float> oneGradInKm(
 		1000.0f * (earthC * cosf(LattitudeCloserEquator(gradusArea.point1.y, gradusArea.point2.y) * (PI / 180.0f))) / 360.0f,
 		1000.0f * (earthC / 360.0f));
 
@@ -299,7 +310,7 @@ Geometry::Rect<float> MeterClearenceByGradusArea(const Geometry::Rect<float>& gr
 	return result;
 }
 
-void DiscretizeRegions(const std::vector<Region>& regions, const Geometry::Point<float>& luPoint,
+void DiscretizeRegions(const vector<Region>& regions, const Point<float>& luPoint,
 											 float h, HostData2D<bool>& discreteField) {
 	discreteField.Fill(false);
 	for (auto region : regions) {
@@ -309,8 +320,7 @@ void DiscretizeRegions(const std::vector<Region>& regions, const Geometry::Point
 	}
 }
 
-void NormalizeRegions(std::vector<Region>& regions, const Geometry::Rect<float>& src,
-											const Geometry::Rect<float>& dst) {
+void NormalizeRegions(vector<Region>& regions, const Rect<float>& src, const Rect<float>& dst) {
 	for (auto& region : regions)
 		region.Normalize(src, dst);
 }
@@ -334,13 +344,14 @@ std::string ForecastKmlFileName() {
 #pragma endregion
 
 #pragma region Forest fires
-std::vector<Region> GetForestFireForecast(const FireSpreadConsts& consts,
-																					std::vector<Region> forestRegions, std::vector<Region> fireRegions,
-																					float fireplaceTemperatureK, float forestRoFuel, float nonForestRoFuel,
-																					float minFireTemperatureK, float modelingTimeSec, bool isUseGpu) {
+
+vector<Region> GetForestFireForecast(const ForestFireConsts& consts,
+																		 vector<Region> forestRegions, vector<Region> fireRegions,
+																		 float fireplaceTemperatureK, float forestRoFuel, float nonForestRoFuel,
+																		 float minFireTemperatureK, float modelingTimeSec, bool isUseGpu) {
 	//Получение габаритов леса градусах и метрах
-	Geometry::Rect<float> gradForestClearence = GetRegionsClearence(forestRegions);
-	Geometry::Rect<float> meterForestClearence = MeterClearenceByGradusArea(gradForestClearence);
+	Rect<float> gradForestClearence = GetRegionsClearence(forestRegions);
+	Rect<float> meterForestClearence = MeterClearenceByGradusArea(gradForestClearence);
 
 	//Нормализация координат между загруженными из файлов и более приемлемыми для расчетов
 	NormalizeRegions(forestRegions, gradForestClearence, meterForestClearence);
@@ -351,7 +362,7 @@ std::vector<Region> GetForestFireForecast(const FireSpreadConsts& consts,
 
 	std::cout << "dimX = " << dimX << "; dimY = " << dimY << std::endl;
 
-	FireSpreadDataH data(dimX, dimY);
+	ForestFireDataH data(dimX, dimY);
 	HostData2D<bool> forestDiscreteGrid(dimX, dimY), fireDiscreteGrid(dimX, dimY);
 	DiscretizeRegions(forestRegions, meterForestClearence.point1, consts.H, forestDiscreteGrid);
 	DiscretizeRegions(fireRegions, meterForestClearence.point1, consts.H, fireDiscreteGrid);
@@ -363,7 +374,7 @@ std::vector<Region> GetForestFireForecast(const FireSpreadConsts& consts,
 		}
 	}
 
-	model = new FireSpreadSimpleModel(consts, data);
+	model = new ForestFireModel(consts, data);
 	size_t countIteration = modelingTimeSec / consts.Tau;
 	for (size_t iterNum = 0; iterNum < countIteration; iterNum++)
 		model->NextIteration(isUseGpu ? "gpu" : "cpu");
@@ -376,9 +387,9 @@ std::vector<Region> GetForestFireForecast(const FireSpreadConsts& consts,
 
 	auto forecastPolygons = Vectorizator::Vectorize(fireDiscreteGrid, meterForestClearence.point1, consts.H);
 
-	std::vector<Region> forecastRegions;
+	vector<Region> forecastRegions;
 	for (auto fireForecastPolygon : forecastPolygons)
-		forecastRegions.push_back(Region(fireForecastPolygon, std::vector<Geometry::Polygon<float>>(0)));
+		forecastRegions.push_back(Region(fireForecastPolygon, std::vector<DataVisualization::Geometry::Polygon<float>>(0)));
 
 	//Нормализация координат в обратную сторону
 	for (Region& forecastRegion : forecastRegions)
@@ -403,10 +414,10 @@ void ForestFireKml(int argc, char ** argv) {
 		
 		//Загрузка регионов пожара и леса из файлов
 		std::cout << "Загрузка файлов..." << std::endl;
-		std::vector<Region> forestRegions = KmlMgr::LoadPolygonsFromFile("forest.kml");
-		std::vector<Region> fireRegions = KmlMgr::LoadPolygonsFromFile("fire.kml");
+		std::vector<Region> forestRegions = DataVisualization::Kml::LoadPolygonsFromFile("forest.kml");
+		std::vector<Region> fireRegions = DataVisualization::Kml::LoadPolygonsFromFile("fire.kml");
 
-		FireSpreadConsts consts;
+		ForestFireConsts consts;
 		consts.H = 40.0f;
 		consts.Tau = 20.0f;
 		consts.Humidity = 0.3f;
@@ -425,17 +436,17 @@ void ForestFireKml(int argc, char ** argv) {
 		consts.EnviromentTemperature = CelsiusToKelvin(0.6f);
 
 		std::cout << "Расчет прогноза..." << std::endl;
-		std::vector<Region> forecastRegions
+		vector<Region> forecastRegions
 			= GetForestFireForecast(consts, forestRegions, fireRegions, fireplaceTemperature, forestRoFuel,
 															nonForestRoFuel, minFireTemperature, modelingTime, isUseGpu);
 
 		std::cout << "Сохранение файла..." << std::endl;
-		KmlMgr::SavePolygonsToFile(ForecastKmlFileName(), "forecastTemplate.kml", forecastRegions);
+		DataVisualization::Kml::SavePolygonsToFile(ForecastKmlFileName(), "forecastTemplate.kml", forecastRegions);
 
 #pragma region Fire KML visualization
-		Geometry::Rect<float> forestClearence = GetRegionsClearence(forestRegions);
+		Rect<float> forestClearence = GetRegionsClearence(forestRegions);
 		FireKmlVisualizator visualizator(consts.H, forestClearence,
-			Geometry::Rect<float>(Geometry::Point<float>(-30.0f, -30.0f), Geometry::Point<float>(30.0f, 30.0f)));
+			Rect<float>(Point<float>(-30.0f, -30.0f), Point<float>(30.0f, 30.0f)));
 		visualizator.fireRegions = fireRegions;
 		visualizator.forestRegions = forestRegions;
 		visualizator.forecastRegions = forecastRegions;
@@ -449,7 +460,7 @@ void ForestFireKml(int argc, char ** argv) {
 		grEngine->Run();
 #pragma endregion
 
-	} catch (DataVisualizationException e) {
+	} catch (DataVisualization::DataVisualizationException e) {
 		std::cout << "Ошибка в модуле визуализации: " << e.what() << std::endl;
 	} catch (std::string e) {
 		std::cout << "Ошибка в вычислениях: "	<< e << std::endl;
@@ -460,16 +471,16 @@ void ForestFireKml(int argc, char ** argv) {
 #pragma endregion
 
 #pragma region Oil spillage
-std::vector<Region> GetOilSpillageForecast(const OilSpillageConsts& consts,
-																					std::vector<Region> waterRegions, std::vector<Region> oilRegions,
-																					float oilplaceImpurity, float waterDeep, float nonWaterDeep,
-																					float minImpurity, float modelingTimeSec, bool isUseGpu,
-																					HostData2D<bool>& waterDiscreteGrid, HostData2D<bool>& oilDiscreteGrid,
-																					HostData2D<bool>& forecastDiscreteGrid,
-																					Geometry::Rect<float>& meterClearence) {
+vector<Region> GetOilSpillageForecast(const OilSpillConsts& consts,
+																			std::vector<Region> waterRegions, std::vector<Region> oilRegions,
+																			float oilplaceImpurity, float waterDeep, float nonWaterDeep,
+																			float minImpurity, float modelingTimeSec, bool isUseGpu,
+																			HostData2D<bool>& waterDiscreteGrid, HostData2D<bool>& oilDiscreteGrid,
+																			HostData2D<bool>& forecastDiscreteGrid,
+																			Rect<float>& meterClearence) {
 	//Получение габаритов водоема в градусах и метрах
-	Geometry::Rect<float> gradWaterClearence = GetRegionsClearence(waterRegions);
-	Geometry::Rect<float> meterWaterClearence = MeterClearenceByGradusArea(gradWaterClearence);
+	Rect<float> gradWaterClearence = GetRegionsClearence(waterRegions);
+	Rect<float> meterWaterClearence = MeterClearenceByGradusArea(gradWaterClearence);
 
 	//!!!
 	meterClearence = meterWaterClearence;
@@ -483,7 +494,7 @@ std::vector<Region> GetOilSpillageForecast(const OilSpillageConsts& consts,
 
 	std::cout << "dimX = " << dimX << "; dimY = " << dimY << std::endl;
 
-	OilSpillageDataH data(dimX, dimY);
+	OilSpillDataH data(dimX, dimY);
 	//!!!
 	//HostData2D<bool> waterDiscreteGrid(dimX, dimY), oilDiscreteGrid(dimX, dimY);
 	waterDiscreteGrid = HostData2D<bool>(dimX, dimY);
@@ -504,7 +515,7 @@ std::vector<Region> GetOilSpillageForecast(const OilSpillageConsts& consts,
 		}
 	}
 
-	model = new OilSpillageImprovedModel(consts, data);
+	model = new OilSpillModel(consts, data);
 	size_t countIteration = modelingTimeSec / consts.Tau;
 	for (size_t iterNum = 0; iterNum < countIteration; iterNum++)
 		model->NextIteration(isUseGpu ? "gpu" : "cpu");
@@ -520,9 +531,9 @@ std::vector<Region> GetOilSpillageForecast(const OilSpillageConsts& consts,
 	auto forecastPolygons = Vectorizator::Vectorize(forecastDiscreteGrid //oilDiscreteGrid
 		, meterWaterClearence.point1, consts.H);
 
-	std::vector<Region> forecastRegions;
+	vector<Region> forecastRegions;
 	for (auto oilForecastPolygon : forecastPolygons)
-		forecastRegions.push_back(Region(oilForecastPolygon, std::vector<Geometry::Polygon<float>>(0)));
+		forecastRegions.push_back(Region(oilForecastPolygon, std::vector<DataVisualization::Geometry::Polygon<float>>(0)));
 
 	//Нормализация координат в обратную сторону
 	for (Region& forecastRegion : forecastRegions)
@@ -546,10 +557,10 @@ void OilSpillageKml(int argc, char ** argv) {
 		
 		//Загрузка регионов пожара и леса из файлов
 		std::cout << "Загрузка файлов..." << std::endl;
-		std::vector<Region> waterRegions = KmlMgr::LoadPolygonsFromFile("water.kml");
-		std::vector<Region> oilRegions = KmlMgr::LoadPolygonsFromFile("oil.kml");
+		std::vector<Region> waterRegions = DataVisualization::Kml::LoadPolygonsFromFile("water.kml");
+		std::vector<Region> oilRegions = DataVisualization::Kml::LoadPolygonsFromFile("oil.kml");
 
-		OilSpillageConsts consts;
+		OilSpillConsts consts;
 		consts.H = 80.0f;//40.0f;
 		consts.Tau = 0.3f;//0.5f;
 
@@ -566,25 +577,25 @@ void OilSpillageKml(int argc, char ** argv) {
 
 		std::cout << "Расчет прогноза..." << std::endl;
 		HostData2D<bool> isWaterField, isOilField, isForecastField;
-		Geometry::Rect<float> meterClearence;
+		Rect<float> meterClearence;
 
-		std::vector<Region> forecastRegions
+		vector<Region> forecastRegions
 			= GetOilSpillageForecast(consts, waterRegions, oilRegions, oilplaceImpurity, waterDeep,
 															 nonWaterDeep, minOilImpurity, modelingTime, isUseGpu,
 															 isWaterField, isOilField, isForecastField, meterClearence); //!!!
 
 		std::cout << "Сохранение файла..." << std::endl;
-		KmlMgr::SavePolygonsToFile(ForecastKmlFileName(), "forecastTemplate.kml", forecastRegions);
+		DataVisualization::Kml::SavePolygonsToFile(ForecastKmlFileName(), "forecastTemplate.kml", forecastRegions);
 
 #pragma region Oil KML visualization
-		Geometry::Rect<float> waterClearence = GetRegionsClearence(waterRegions);
+		DataVisualization::Geometry::Rect<float> waterClearence = GetRegionsClearence(waterRegions);
 
-		Geometry::Point<float> h(
+		Point<float> h(
 			fabsf(waterClearence.point1.x - waterClearence.point2.x) / (float)isWaterField.dimX(),
 			fabsf(waterClearence.point1.y - waterClearence.point2.y) / (float)isWaterField.dimY());
 
 		OilKmlVisualizator visualizator(h, waterClearence,
-			Geometry::Rect<float>(Geometry::Point<float>(-30.0f, -30.0f), Geometry::Point<float>(30.0f, 30.0f)));
+			Rect<float>(Point<float>(-30.0f, -30.0f), Point<float>(30.0f, 30.0f)));
 		visualizator.waterRegions = waterRegions;
 		visualizator.oilRegions = oilRegions;
 		visualizator.forecastRegions = forecastRegions;
@@ -602,7 +613,7 @@ void OilSpillageKml(int argc, char ** argv) {
 		grEngine->Run();
 #pragma endregion
 
-	} catch (DataVisualizationException e) {
+	} catch (DataVisualization::DataVisualizationException e) {
 		std::cout << "Ошибка в модуле визуализации: " << e.what() << std::endl;
 	} catch (std::string e) {
 		std::cout << "Ошибка в вычислениях: "	<< e << std::endl;

@@ -373,10 +373,10 @@ FireSpreadSimpleModelTest *InitRoutines::GetInitedFireSpreadSimpleModel(size_t d
 	float ks = 0.01f;
 	float enviromentTemperature = 0.0f;
 
-	FireSpreadConsts consts(h, tau, humidity, windAngle, windSpeed, m2, danu, temOnBounds,
+	ForestFireConsts consts(h, tau, humidity, windAngle, windSpeed, m2, danu, temOnBounds,
 													iterFireBeginNum, qbig, mstep, tzv, temKr, qlitl, ks, enviromentTemperature);
 		
-	FireSpreadDataH data(dimX, dimY);
+	ForestFireDataH data(dimX, dimY);
 	data.Fill(enviromentTemperature);
 
 	for(size_t x = 0; x < data.dimX(); x++) {
@@ -419,7 +419,7 @@ FireSpreadSimpleModelTest *InitRoutines::GetInitedFireSpreadModelTest() {
 	const bool isUseGpu = false;
 	const float minFireTemperature = 300.0f;
 
-	FireSpreadConsts consts(h, tau, humidity, windAngle, windSpeed, m2, danu, temOnBounds,
+	ForestFireConsts consts(h, tau, humidity, windAngle, windSpeed, m2, danu, temOnBounds,
 													iterFireBeginNum, qbig, mstep, tzv, temKr, qlitl, ks, enviromentTemperature);
 	throw "Not implemented";
 }
@@ -530,7 +530,7 @@ OilSpillageImprovedModelTest *InitRoutines::GetInitedOilSpillageImprovedModel(si
 	float defImpurity = 3.0f;
 	float defPress = 0.0f;
 
-	OilSpillageDataH data(dimX, dimY);
+	OilSpillDataH data(dimX, dimY);
 	for (size_t x = 0; x <= dimX - 1; x++) {
 		for (size_t y = 0; y <= dimY - 1; y++) {
 			data.waterUx(x, y) = defWaterUx;
@@ -544,7 +544,7 @@ OilSpillageImprovedModelTest *InitRoutines::GetInitedOilSpillageImprovedModel(si
 		}
 	}
 
-	OilSpillageConsts consts;
+	OilSpillConsts consts;
 	consts.Temperature = 20.0f;
 	consts.Tau = 0.3f;
 	consts.CoriolisFactor = 0.001f;

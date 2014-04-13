@@ -232,7 +232,7 @@ namespace CapacityTests {
 	
 		std::cout << "Тест производительности модели разлива нефти. Метод: " << methodName << std::endl;
 
-		OilSpillageImprovedModel* model;
+		OilSpillModel* model;
 		
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
 			model = InitRoutines::GetInitedOilSpillageImprovedModel(dim, dim);

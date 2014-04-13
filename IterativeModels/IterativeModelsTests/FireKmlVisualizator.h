@@ -7,28 +7,33 @@
 #include "GraphicUtils.h"
 #include "HostData.hpp"
 
+using std::vector;
+using DataVisualization::Geometry::Rect;
+using DataVisualization::Geometry::Point;
+using DataVisualization::Kml::Region;
+
 class FireKmlVisualizator : public IPresentable {
 private:
 	float h;
-	Geometry::Rect<float> realArea;
-	Geometry::Rect<float> glArea;
+	Rect<float> realArea;
+	Rect<float> glArea;
 
-	void Vertex(Geometry::Point<float> point) {
+	void Vertex(Point<float> point) {
 		Vertex(point.x, point.y);
 	}
 
 	void Vertex(float x, float y) {
-		Geometry::Point<float> p(x, y);
+		Point<float> p(x, y);
 		p.NormalizeCoordinate(realArea, glArea);
 		glVertex2f(p.x, p.y);
 	}
 
-	void DrawPolygon(Geometry::Polygon<float> polygon) {
+	void DrawPolygon(DataVisualization::Geometry::Polygon<float> polygon) {
 		glBegin(GL_LINES);
 
 		int countVerts = polygon.vertexes.size();
 
-		Geometry::Point<float> curP, nextP;
+		Point<float> curP, nextP;
 		for (int curPointInd = 0; curPointInd < countVerts - 1; curPointInd++) {
 			curP = polygon.vertexes[curPointInd];
 			nextP = polygon.vertexes[curPointInd + 1];
@@ -44,11 +49,11 @@ private:
 	}
 		
 public:
-	std::vector<Region> fireRegions;
-	std::vector<Region> forestRegions;
-	std::vector<Region> forecastRegions;
+	vector<DataVisualization::Kml::Region> fireRegions;
+	vector<Region> forestRegions;
+	vector<Region> forecastRegions;
 
-	FireKmlVisualizator(float h, Geometry::Rect<float> area, Geometry::Rect<float> glArea)
+	FireKmlVisualizator(float h, Rect<float> area, Rect<float> glArea)
 		: h(h), realArea(area), glArea(glArea) { }
 
 	virtual void Draw() {

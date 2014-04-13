@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="Kernels_BoundaryConditions.cu">
+      <Filter>Core\Kernels</Filter>
+    </None>
+    <None Include="Kernels_ExplicitGaussSeidel.cu">
+      <Filter>Core\Kernels</Filter>
+    </None>
+    <None Include="Kernels_ImplicitSweep.cu">
+      <Filter>Core\Kernels</Filter>
+    </None>
+    <None Include="DeviceData.cu">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="SweepFactors.cu">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="SonsodeFunctionsLib.cu">
+      <Filter>Core</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GpuDevice.cpp">
+      <Filter>GpuDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="GpuDeviceFactory.cpp">
+      <Filter>GpuDevice</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SonsodeCommon.h" />
+    <ClInclude Include="GpuDevice.hpp">
+      <Filter>GpuDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="GpuDeviceFactory.h">
+      <Filter>GpuDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="HostData.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="HostDataPrinter.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Vectors.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{8454d28d-4ea6-4daa-b1f9-09bff2c4c5cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Kernels">
+      <UniqueIdentifier>{47db60f8-31f1-4469-a219-ae38adbb2aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GpuDevice">
+      <UniqueIdentifier>{f8445af2-d095-4021-b368-6508115b9431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{eda58793-a2df-4952-b74f-77d8134fa1ee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

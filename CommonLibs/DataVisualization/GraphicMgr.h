@@ -8,90 +8,99 @@
 #include <functional>
 #include "IPresentable.h"
 
-enum class CameraRotateDirection {
-	Up,
-	Down,
-	Left,
-	Right
-};
+namespace DataVisualization {
+	namespace Graphic {
+		using std::vector;
+		using std::map;
+		using std::function;
+		using std::string;
 
-enum class CameraZoomDirection {
-	In,
-	Out
-};
+		enum class CameraRotateDirection {
+			Up,
+			Down,
+			Left,
+			Right
+		};
 
-class GraphicMgr {
-private:
-	static GraphicMgr *Instance;
+		enum class CameraZoomDirection {
+			In,
+			Out
+		};
 
-	static void OnDisplay();
-	static void OnReshape(int, int);
-	static void OnKeyboard(unsigned char, int, int);
-	static void OnMouse(int, int, int, int);
+		class GraphicMgr {
+		private:
+			static GraphicMgr *Instance;
 
-	int wndHdlr;
+			static void OnDisplay();
+			static void OnReshape(int, int);
+			static void OnKeyboard(unsigned char, int, int);
+			static void OnMouse(int, int, int, int);
 
-	float camAngleShiftStep;
-	float camHorzShift;
-	float camVertShift;
+			int wndHdlr;
 
-	float zoomDim;
-	float zoomStep;
+			float camAngleShiftStep;
+			float camHorzShift;
+			float camVertShift;
 
-	bool isPerspective;
-	bool isLight;
+			float zoomDim;
+			float zoomStep;
 
-	float leftVisibilityBound;
-	float rightVisibilityBound;
-	float upVisibilityBound;
-	float downVisibilityBound;
+			bool isPerspective;
+			bool isLight;
 
-	bool isRun;
+			float leftVisibilityBound;
+			float rightVisibilityBound;
+			float upVisibilityBound;
+			float downVisibilityBound;
 
-	GraphicMgr();
-	~GraphicMgr();
+			bool isRun;
+
+			GraphicMgr();
+			~GraphicMgr();
 	
-	void SetCamPosition();
+			void SetCamPosition();
 
-	std::vector<IPresentable*> presentObjs;
-	std::map<unsigned char, std::function<void()>> keyboardHandlers;
-	std::function<void()> preDrawHandler;
+			vector<IPresentable*> presentObjs;
+			map<unsigned char, function<void()>> keyboardHandlers;
+			function<void()> preDrawHandler;
 
-	void RegisterDisplayFunc(void (*func)(void));
-	void RegisterReshapeFunc(void (*func)(int, int));
-	void RegisterKeyboardFunc(void (*func)(unsigned char, int, int));
-	void RegisterMouseFunc(void (*func)(int, int, int, int));
+			void RegisterDisplayFunc(void (*func)(void));
+			void RegisterReshapeFunc(void (*func)(int, int));
+			void RegisterKeyboardFunc(void (*func)(unsigned char, int, int));
+			void RegisterMouseFunc(void (*func)(int, int, int, int));
 	
-	void onWindowDisplay();
-	void onWindowReshape(int width, int height);
-	void onWindowKeyboard(unsigned char key, int x, int y);
-	void onWindowMouse(int button, int state, int x, int y);
+			void onWindowDisplay();
+			void onWindowReshape(int width, int height);
+			void onWindowKeyboard(unsigned char key, int x, int y);
+			void onWindowMouse(int button, int state, int x, int y);
 
-	void Init(int argc, char **argv, const std::string windowName);
-public:
-	static GraphicMgr *New(int argc, char **argv, const std::string windowName);
-	static GraphicMgr *New(int argc, char **argv, const std::string windowName, bool isPerspective, bool isLight);
-	static void Free();
+			void Init(int argc, char **argv, const string windowName);
+		public:
+			static GraphicMgr *New(int argc, char **argv, const string windowName);
+			static GraphicMgr *New(int argc, char **argv, const string windowName, bool isPerspective, bool isLight);
+			static void Free();
 
-	void ReDisplay();
-	void Run();
+			void ReDisplay();
+			void Run();
 
-	void StartAnimation();
-	void StopAnimation();
+			void StartAnimation();
+			void StopAnimation();
 
-	bool IsRunAnimation();
+			bool IsRunAnimation();
 
-	void CameraRotate(CameraRotateDirection direction);
-	void CameraZoom(CameraZoomDirection direction);
+			void CameraRotate(CameraRotateDirection direction);
+			void CameraZoom(CameraZoomDirection direction);
 
-	void AddPresentObj(IPresentable *obj);
-	void ClearPresentObjs();
+			void AddPresentObj(IPresentable *obj);
+			void ClearPresentObjs();
 
-	void AddUpdateKeyboardHandler(unsigned char key, std::function<void()> handler);
-	void AddUpdateKeyboardHandler(std::string keys, std::function<void()> handler);
-	void ClearKeyboardHandler();
+			void AddUpdateKeyboardHandler(unsigned char key, function<void()> handler);
+			void AddUpdateKeyboardHandler(string keys, function<void()> handler);
+			void ClearKeyboardHandler();
 
-	void SetVisibilityArea(float left, float right, float up, float down);
+			void SetVisibilityArea(float left, float right, float up, float down);
 
-	void RegisterPreDrawHandler(std::function<void()> handler);
-};
+			void RegisterPreDrawHandler(function<void()> handler);
+		};
+	}
+}

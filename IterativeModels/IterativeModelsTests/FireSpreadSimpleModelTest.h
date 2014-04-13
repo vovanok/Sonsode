@@ -1,13 +1,20 @@
 #pragma once
 
-#include "FireSpreadSimpleModel.h"
+#include "ForestFireModel.h"
 #include "GraphicUtils.h"
 #include "IPresentable.h"
 
-class FireSpreadSimpleModelTest : public FireSpreadSimpleModel, public IPresentable {
+using Sonsode::Vector3D;
+using DataVisualization::IPresentable;
+using DataVisualization::Graphic::ColorPalette;
+using DataVisualization::Graphic::Color;
+using DataVisualization::Geometry::Grid3DCoordSys;
+using namespace ForestFire;
+
+class FireSpreadSimpleModelTest : public ForestFireModel, public IPresentable {
 public:
-	FireSpreadSimpleModelTest(FireSpreadConsts consts, FireSpreadDataH data)
-		: FireSpreadSimpleModel(consts, data),
+	FireSpreadSimpleModelTest(ForestFireConsts consts, ForestFireDataH data)
+		: ForestFireModel(consts, data),
 			cs(Grid3DCoordSys(Vector3D<size_t>(data.dimX(), 1, data.dimY()))),
 			cp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 200.0f)) {
 
@@ -24,7 +31,7 @@ public:
 			for (size_t y = 0; y <= _data.dimY() - 1; y++)
 				drawingData(x, 0, y) = _data.t(x, y);
 
-		GraphicUtils::DrawColoredSpace(drawingData, Vector3D<size_t>(0, 0, 0), cp, cs);
+		DataVisualization::Graphic::DrawColoredSpace(drawingData, Vector3D<size_t>(0, 0, 0), cp, cs);
 	}
 
 	virtual void Impact(char keyCode, int button, int state, int x, int y) { }

@@ -70,14 +70,16 @@
     <ClCompile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\CommonLibs\DataCalculation;..\..\CommonLibs\UnitedUtils;..\..\External;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\CommonLibs\Sonsode;..\..\CommonLibs\UnitedUtils;..\..\External;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;..\..\External;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>DataCalculation.lib;UnitedUtils.lib;tinyxml.lib;</AdditionalDependencies>
+      <AdditionalDependencies>Sonsode.lib;UnitedUtils.lib;tinyxml.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

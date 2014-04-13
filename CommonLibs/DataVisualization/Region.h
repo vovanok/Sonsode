@@ -3,16 +3,25 @@
 #include <vector>
 #include "Geometry.hpp"
 
-class Region {
-public:
-	Geometry::Polygon<float> outerBounder;
-	std::vector<Geometry::Polygon<float>> innerBounders;
+namespace DataVisualization {
+	namespace Kml {
+		using std::vector;
+		using DataVisualization::Geometry::Polygon;
+		using DataVisualization::Geometry::Point;
+		using DataVisualization::Geometry::Rect;
+		
+		class Region {
+		public:
+			Polygon<float> outerBounder;
+			vector<Polygon<float>> innerBounders;
 
-	Region(Geometry::Polygon<float> outerBounder, std::vector<Geometry::Polygon<float>> innerBounders)
-		: outerBounder(outerBounder), innerBounders(innerBounders) { }
+			Region(Polygon<float> outerBounder, vector<Polygon<float>> innerBounders)
+				: outerBounder(outerBounder), innerBounders(innerBounders) { }
 
-	bool PointInSide(float x, float y) const;
-	bool PointInSide(Geometry::Point<float> point) const;
-	Geometry::Rect<float> GetClearanceBorders() const;
-	void Normalize(const Geometry::Rect<float>& src, const Geometry::Rect<float>& dst);
-};
+			bool PointInSide(float x, float y) const;
+			bool PointInSide(Point<float> point) const;
+			Rect<float> GetClearanceBorders() const;
+			void Normalize(const Rect<float>& src, const Rect<float>& dst);
+		};
+	}
+}

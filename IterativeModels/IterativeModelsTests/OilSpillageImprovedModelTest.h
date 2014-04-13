@@ -1,15 +1,16 @@
 #pragma once
 
-#include "OilSpillageImprovedModel.h"
+#include "OilSpillModel.h"
 #include "GraphicUtils.h"
 #include "IPresentable.h"
 
 using Sonsode::HostData2D;
+using namespace OilSpill;
 
-class OilSpillageImprovedModelTest : public OilSpillageImprovedModel, public IPresentable {
+class OilSpillageImprovedModelTest : public OilSpillModel, public IPresentable {
 public:
-	OilSpillageImprovedModelTest(OilSpillageConsts consts, OilSpillageDataH data)
-		: OilSpillageImprovedModel(consts, data),
+	OilSpillageImprovedModelTest(OilSpillConsts consts, OilSpillDataH data)
+		: OilSpillModel(consts, data),
 			cs(Grid3DCoordSys(Vector3D<size_t>(data.dimX(), 1, data.dimY()))) { }
 
 	virtual ~OilSpillageImprovedModelTest() { }
@@ -28,7 +29,7 @@ public:
 				}
 			}
 		
-			GraphicUtils::DrawImpurityPlain(impurities, isEarths, 0.0f, 100.0f, cs);
+			DataVisualization::Graphic::DrawImpurityPlain(impurities, isEarths, 0.0f, 100.0f, cs);
 
 			impurities.Erase();
 			isEarths.Erase();

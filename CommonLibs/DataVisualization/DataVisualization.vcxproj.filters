@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="GraphicMgr.h" />
-    <ClInclude Include="GraphicUtils.h" />
-    <ClInclude Include="ColorPalette.h" />
     <ClInclude Include="IPresentable.h" />
-    <ClInclude Include="Grid3DCoordSys.h" />
     <ClInclude Include="KmlMgr.h">
-      <Filter>FileManagers\KML</Filter>
+      <Filter>KML</Filter>
     </ClInclude>
     <ClInclude Include="Region.h">
-      <Filter>FileManagers\KML</Filter>
+      <Filter>KML</Filter>
     </ClInclude>
     <ClInclude Include="Vectorizator.h">
       <Filter>Geometry</Filter>
@@ -19,19 +15,39 @@
     <ClInclude Include="Geometry.hpp">
       <Filter>Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="ColorPalette.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicMgr.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicUtils.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid3DCoordSys.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GraphicMgr.cpp" />
-    <ClCompile Include="GraphicUtils.cpp" />
-    <ClCompile Include="ColorPalette.cpp" />
-    <ClCompile Include="Grid3DCoordSys.cpp" />
     <ClCompile Include="KmlMgr.cpp">
-      <Filter>FileManagers\KML</Filter>
+      <Filter>KML</Filter>
     </ClCompile>
     <ClCompile Include="Region.cpp">
-      <Filter>FileManagers\KML</Filter>
+      <Filter>KML</Filter>
     </ClCompile>
     <ClCompile Include="Vectorizator.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorPalette.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicMgr.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicUtils.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid3DCoordSys.cpp">
       <Filter>Geometry</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,11 +55,11 @@
     <Filter Include="Geometry">
       <UniqueIdentifier>{83fc055f-1d91-49e1-80be-3f499416c378}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FileManagers">
-      <UniqueIdentifier>{f3ec78be-e33e-43a7-ac05-56ca61d37663}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FileManagers\KML">
+    <Filter Include="KML">
       <UniqueIdentifier>{ece6ed7a-a078-428d-8c16-8eddebe7ea37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{bb967324-8871-4ebb-bec7-6a99681d6791}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

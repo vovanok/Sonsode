@@ -1,9 +1,10 @@
 #pragma once
 
-#include "AirFlowDistributionModel.h"
+#include "AirFlowModel.h"
 #include "GraphicUtils.h"
 
 using Sonsode::HostData3D;
+using namespace AirFlow;
 
 enum class VectorViewType {
 	SPACE = 0,
@@ -16,7 +17,7 @@ enum class ViewMode {
 	T_SPACE = 2
 };
 
-class AirFlowDistributionModelTest : public AirFlowDistributionModel, public IPresentable {
+class AirFlowDistributionModelTest : public AirFlowModel, public IPresentable {
 private:
 	VectorViewType vectorsView;
 	ViewMode viewMode;
@@ -33,7 +34,7 @@ public:
 	Vector3D<size_t> curPlane;
 	
 	AirFlowDistributionModelTest(AirFlowConsts consts, AirFlowDataH data)
-			: AirFlowDistributionModel(consts, data),
+			: AirFlowModel(consts, data),
 				roCp(ColorPalette(Color(0.0f, 0.0f, 0.0f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), 1.2f, 1.3f)),
 				tCp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 500.0f)),
 				cs(Grid3DCoordSys(Vector3D<size_t>(_data.dimX(), _data.dimY(), _data.dimZ()), 35.0f, _consts.H)),
@@ -98,16 +99,16 @@ public:
 
 		switch(vectorsView) {
 		case VectorViewType::DISSECTED_SPACE:
-			GraphicUtils::DrawDissectedVectorSpace(vectors, minVectorValue, maxVectorValue, curPlane, cs); break;
+			DataVisualization::Graphic::DrawDissectedVectorSpace(vectors, minVectorValue, maxVectorValue, curPlane, cs); break;
 		case VectorViewType::SPACE:
-			GraphicUtils::DrawVectorSpace(vectors, minVectorValue, maxVectorValue, cs); break;
+			DataVisualization::Graphic::DrawVectorSpace(vectors, minVectorValue, maxVectorValue, cs); break;
 		}
 
 		for (size_t z = 0; z < _data.dimZ(); z++)
 			for (size_t y = 0; y < _data.dimY(); y++)
 				for (size_t x = 0; x < _data.dimX(); x++)
 					buffer(x, y, z) = (viewMode == ViewMode::RO_SPACE) ? _data.t(x, y, z) : _data.ro(x, y, z);
-		GraphicUtils::DrawColoredSpace(buffer, curPlane, (viewMode == ViewMode::RO_SPACE) ? tCp : roCp, cs);
+		DataVisualization::Graphic::DrawColoredSpace(buffer, curPlane, (viewMode == ViewMode::RO_SPACE) ? tCp : roCp, cs);
 	}
 
 	virtual void Impact(char keyCode, int button, int state, int x, int y) {

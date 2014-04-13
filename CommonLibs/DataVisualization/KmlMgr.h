@@ -9,8 +9,14 @@
 #include "Region.h"
 #include "Geometry.hpp"
 
-namespace KmlMgr {
-	std::vector<Region> LoadPolygonsFromFile(const std::string& fileName);
-	void SavePolygonsToFile(const std::string& fileName, const std::string& templateFilename,
-													const std::vector<Region>& regions);
-};
+namespace DataVisualization {
+	namespace Kml {
+		using std::vector;
+		using std::string;
+		using std::stringstream;
+		using std::exception;
+
+		vector<Region> LoadPolygonsFromFile(const string& fileName);
+		void SavePolygonsToFile(const string& fileName, const string& templateFilename, const vector<Region>& regions);
+	}
+}

@@ -1,13 +1,15 @@
 #pragma once
 
-#include "HeatConductivity2DModel.h"
+#include "Heat2DModel.h"
 #include "IPresentable.h"
 #include "GraphicUtils.h"
 
-class HeatConductivity2DModelTest : public HeatConductivity2DModel, public IPresentable {
+using namespace Heat2D;
+
+class HeatConductivity2DModelTest : public Heat2DModel, public IPresentable {
 public:
 	HeatConductivity2DModelTest(HostData2D<float> t, float h, float a, float tau)
-			: HeatConductivity2DModel(t, h, a, tau),
+			: Heat2DModel(t, h, a, tau),
 				cs(Grid3DCoordSys(Vector3D<size_t>(t.dimX(), 1, t.dimY()))),
 				cp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 200.0f)) {
 		
@@ -24,7 +26,7 @@ public:
 			for (size_t y = 0; y < t().dimY(); y++)
 				drawingData(x, 0, y) = t()(x, y);
 		
-		GraphicUtils::DrawColoredSpace(drawingData, Vector3D<size_t>(0, 0, 0), cp, cs);
+		DataVisualization::Graphic::DrawColoredSpace(drawingData, Vector3D<size_t>(0, 0, 0), cp, cs);
 	}
 
 	virtual void Impact(char keyCode, int button, int state, int x, int y) { }

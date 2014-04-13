@@ -69,12 +69,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\External;..\..\CommonLibs\IterativeModeling;..\..\CommonLibs\DataCalculation;..\..\CommonLibs\DataVisualization;..\..\CommonLibs\UnitedUtils;$(CUDA_PATH)\include;..\CuAirFlowDistributionModel;..\CuFireSpread3DModel;..\CuFireSpreadSimpleModel;..\CuHeatConductivity3DModel;..\CuHeatConductivityModel;..\CuOilSpillageModel;..\CuParticlesModel;..\HeatConductivitySweepModel;..\CuOilSpillageImprovedModel;..\Model_Experimental;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\External;..\..\CommonLibs\IterativeModeling;..\..\CommonLibs\Sonsode;..\..\CommonLibs\DataVisualization;..\..\CommonLibs\UnitedUtils;$(CUDA_PATH)\include;..\Model_AirFlow;..\Model_ForestFire;..\Model_Heat3D;..\Model_Heat2D;..\Model_OilSpill;</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;$(CUDA_PATH)\lib\Win32;..\..\External;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>IterativeModeling.lib;DataCalculation.lib;DataVisualization.lib;UnitedUtils.lib;cudart.lib;CuAirFlowDistributionModel.lib;CuFireSpreadSimpleModel.lib;CuHeatConductivity3DModel.lib;CuHeatConductivityModel.lib;CuOilSpillageImprovedModel.lib;tinyxml.lib;</AdditionalDependencies>
+      <AdditionalDependencies>IterativeModeling.lib;Sonsode.lib;DataVisualization.lib;UnitedUtils.lib;cudart.lib;tinyxml.lib;Model_AirFlow.lib;Model_ForestFire.lib;Model_Heat2D.lib;Model_Heat3D.lib;Model_OilSpill.lib;</AdditionalDependencies>
     </Link>
     <CudaCompile>
       <CodeGeneration>compute_11,sm_11</CodeGeneration>
