@@ -4,6 +4,7 @@
 #include "HostData.hpp"
 #include "GpuDevice.hpp"
 #include "GpuDeviceFactory.h"
+#include "SonsodeException.h"
 
 namespace Sonsode {
 	template<class T>
@@ -137,7 +138,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData1D<T>::TakeFrom(const HostData1D<T> &data_h) {
 		if (dimX() != data_h.dimX())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyTo(data(), data_h.data(), dimX());
 	}
@@ -145,7 +146,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData1D<T>::PutTo(HostData1D<T> &data_h) const {
 		if (dimX() != data_h.dimX())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyFrom(data_h.data(), data(), dimX());
 	}
@@ -172,7 +173,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData2D<T>::TakeFrom(const HostData2D<T> &data_h) {
 		if (dimX() != data_h.dimX() || dimY() != data_h.dimY())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyTo(data(), data_h.data(), dimX() * dimY());
 	}
@@ -180,7 +181,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData2D<T>::PutTo(HostData2D<T> &data_h) const {
 		if (dimX() != data_h.dimX() || dimY() != data_h.dimY())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyFrom(data_h.data(), data(), dimX() * dimY());
 	}
@@ -209,7 +210,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData3D<T>::TakeFrom(const HostData3D<T>& data_h) {
 		if (dimX() != data_h.dimX() || dimY() != data_h.dimY() || dimZ() != data_h.dimZ())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyTo(data(), data_h.data(), dimX() * dimY() * dimZ());
 	}
@@ -217,7 +218,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData3D<T>::PutTo(HostData3D<T> &data_h) const {
 		if (dimX() != data_h.dimX() || dimY() != data_h.dimY() || dimZ() != data_h.dimZ())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyFrom(data_h.data(), data(), dimX() * dimY() * dimZ());
 	}
@@ -248,7 +249,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData4D<T>::TakeFrom(const HostData4D<T>& data_h) {
 		if (dimX() != data_h.dimX() || dimY() != data_h.dimY() || dimZ() != data_h.dimZ() || dimW() != data_h.dimW())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyTo(data(), data_h.data(), dimX() * dimY() * dimZ() * dimW());
 	}
@@ -256,7 +257,7 @@ namespace Sonsode {
 	template<class T>
 	void DeviceData4D<T>::PutTo(HostData4D<T> &data_h) const {
 		if (dimX() != data_h.dimX() || dimY() != data_h.dimY() || dimZ() != data_h.dimZ() || dimW() != data_h.dimW())
-			throw std::string("Different sizes of data");
+			throw SonsodeException("Different sizes of data");
 
 		gpu().CpyFrom(data_h.data(), data(), dimX() * dimY() * dimZ() * dimW());
 	}

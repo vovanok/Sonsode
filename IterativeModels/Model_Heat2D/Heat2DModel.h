@@ -40,8 +40,8 @@ namespace Heat2D {
 		Heat2DFunctor<DeviceData2D<float>> fnGPU;
 
 		//BaseModel
-		virtual void PrepareDataForGpu(const GpuDevice &gpu, size_t orderNumber) throw(std::string);
-		virtual void FreeDataForGpus() throw(std::string);
+		virtual void PrepareDataForGpu(const GpuDevice &gpu, size_t orderNumber);
+		virtual void FreeDataForGpus();
 
 		void CalculationMethod_CPU_GaussSeidel();
 		void CalculationMethod_CPU_Sweep();
@@ -52,8 +52,8 @@ namespace Heat2D {
 		void CalculationMethod_GPU_Sweep_LineDevide();
 		void CalculationMethod_GPU_Sweep_BlockDevide();
 
-		void InitSweep(bool useGpu) throw (std::string);
-		void DeinitSweep() throw (std::string);
+		void InitSweep(bool useGpu);
+		void DeinitSweep();
 	public:
 		Heat2DModel(HostData2D<float> t, float h, float a, float tau);
 		~Heat2DModel() {

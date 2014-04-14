@@ -11,9 +11,9 @@ using DataVisualization::Graphic::Color;
 using DataVisualization::Geometry::Grid3DCoordSys;
 using namespace ForestFire;
 
-class FireSpreadSimpleModelTest : public ForestFireModel, public IPresentable {
+class ForestFireTestModel : public ForestFireModel, public IPresentable {
 public:
-	FireSpreadSimpleModelTest(ForestFireConsts consts, ForestFireDataH data)
+	ForestFireTestModel(ForestFireConsts consts, ForestFireDataH data)
 		: ForestFireModel(consts, data),
 			cs(Grid3DCoordSys(Vector3D<size_t>(data.dimX(), 1, data.dimY()))),
 			cp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 200.0f)) {

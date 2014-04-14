@@ -45,6 +45,7 @@
     <ClInclude Include="Vectors.hpp">
       <Filter>Data</Filter>
     </ClInclude>
+    <ClInclude Include="SonsodeException.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

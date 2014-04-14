@@ -71,13 +71,9 @@ namespace OilSpill {
 	void OilSpillModel::CalculationMethod_CPU() {
 		GpuOff();
 	
-		//gran
-		//ResolveBoundaryConditions();
-
 		ImplicitSweep_2D_CPU(sf_h, waterUxCPU);
 		ImplicitSweep_2D_CPU(sf_h, waterUyCPU);
 
-		//CalculateS_Press
 		ExplicitGaussSeidel_2D_CPU(pressSCPU);
 
 		Boundary_2D_CPU(pressSCPU);
@@ -85,7 +81,6 @@ namespace OilSpill {
 
 		ImplicitSweep_2D_CPU(sf_h, pressCPU);
 
-		//Press boundary condition
 		Boundary_2D_CPU(pressCPU);
 
 		ExplicitGaussSeidel_2D_CPU(waterUxSCPU);
@@ -97,14 +92,8 @@ namespace OilSpill {
 		ExplicitGaussSeidel_2D_CPU(oilUxCPU);
 		ExplicitGaussSeidel_2D_CPU(oilUyCPU);
 
-		//gran
-		//ResolveBoundaryConditions();
-
 		ExplicitGaussSeidel_2D_CPU(wCPU);
 		ImplicitSweep_2D_CPU(sf_h, impurityCPU);
-
-		//gran
-		//ResolveBoundaryConditions();
 
 		ExplicitGaussSeidel_2D_CPU(impurityIstokCPU);
 
@@ -114,13 +103,9 @@ namespace OilSpill {
 	void OilSpillModel::CalculationMethod_GPU() {
 		GpuOn();
 
-		////gran
-		////ResolveBoundaryConditions();
-	
 		ImplicitSweep_2D_GPU_lineDivide(sf_d, waterUxGPU);
 		ImplicitSweep_2D_GPU_lineDivide(sf_d, waterUyGPU);
 
-		////CalculateS_Press
 		ExplicitGaussSeidel_2D_GPU_direct(pressSGPU);
 
 		Boundary_2D_GPU(pressSGPU);
@@ -128,7 +113,6 @@ namespace OilSpill {
 
 		ImplicitSweep_2D_GPU_lineDivide(sf_d, pressGPU);
 
-		//Press boundary condition
 		Boundary_2D_GPU(pressGPU);
 
 		ExplicitGaussSeidel_2D_GPU_direct(waterUxSGPU);
@@ -140,14 +124,8 @@ namespace OilSpill {
 		ExplicitGaussSeidel_2D_GPU_direct(oilUxGPU);
 		ExplicitGaussSeidel_2D_GPU_direct(oilUyGPU);
 
-		////gran
-		////ResolveBoundaryConditions();
-
 		ExplicitGaussSeidel_2D_GPU_direct(wGPU);
 		ImplicitSweep_2D_GPU_lineDivide(sf_d, impurityGPU);
-
-		////gran
-		////ResolveBoundaryConditions();
 
 		ExplicitGaussSeidel_2D_GPU_direct(impurityIstokGPU);
 

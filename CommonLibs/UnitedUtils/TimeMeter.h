@@ -5,8 +5,6 @@
 #include <math.h>
 
 class TimeMeter {
-
-protected:
 	LONGLONG beginTime;
 	LONGLONG endTime;
 

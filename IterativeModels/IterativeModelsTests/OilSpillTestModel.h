@@ -7,13 +7,13 @@
 using Sonsode::HostData2D;
 using namespace OilSpill;
 
-class OilSpillageImprovedModelTest : public OilSpillModel, public IPresentable {
+class OilSpillTestModel : public OilSpillModel, public IPresentable {
 public:
-	OilSpillageImprovedModelTest(OilSpillConsts consts, OilSpillDataH data)
+	OilSpillTestModel(OilSpillConsts consts, OilSpillDataH data)
 		: OilSpillModel(consts, data),
 			cs(Grid3DCoordSys(Vector3D<size_t>(data.dimX(), 1, data.dimY()))) { }
 
-	virtual ~OilSpillageImprovedModelTest() { }
+	virtual ~OilSpillTestModel() { }
 
 	virtual void Draw() {
 		try {
@@ -33,8 +33,8 @@ public:
 
 			impurities.Erase();
 			isEarths.Erase();
-		} catch(std::string e) {
-			std::cout << e << std::endl;
+		} catch(std::exception e) {
+			std::cout << e.what() << std::endl;
 		}
 	}
 

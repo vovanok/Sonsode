@@ -122,19 +122,17 @@ namespace Sonsode {
 		
 		template<class FunctorType>
 		void ExplicitGaussSeidel_3D_GPU_direct(FunctorType fn) {
-			//расчет размера решетки
+			//Виртуальный размер решетки
 			int gridDimX = GetBlockCount(fn.dimX());
 			int gridDimY = GetBlockCount(fn.dimY());
 			int gridDimZ = GetBlockCount(fn.dimZ());
-	
+
+			//Фактический размер решетки
 			int gridSize = gridDimX * gridDimY * gridDimZ;
 
-			//трехкомпонентный вектор размерностей блока
 			dim3 threads(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-
 			dim3 blocks(gridSize);
 
-			//вызов ядра
 			fn.gpu().SetAsCurrent();
 			Sonsode::Kernels::Kernel_ExplicitGaussSeidel_3D_Direct<<<blocks, threads>>>(fn, gridDimX, gridDimY, gridDimZ);
 			fn.gpu().Synchronize();
@@ -157,14 +155,14 @@ namespace Sonsode {
 		void ImplicitSweep_2D_GPU_lineDivide(DeviceData2D<SweepFactors<float>> sweepFactors, FunctorType fn) {
 			size_t gridSize;
 			
-			//Around X
+			//Прогонка по X
 			gridSize = GetBlockCount(fn.dimY());
 			fn.gpu().SetAsCurrent();
 			Sonsode::Kernels::Kernel_ImplicitSweepAroundX_2D_GPUlineDivide<<<gridSize, BLOCK_SIZE>>>(sweepFactors, fn);
 			fn.gpu().Synchronize();
 			fn.gpu().CheckLastErr();
 
-			//Around Y
+			//Прогонка по Y
 			gridSize = GetBlockCount(fn.dimX());
 			fn.gpu().SetAsCurrent();
 			Sonsode::Kernels::Kernel_ImplicitSweepAroundY_2D_GPUlineDivide<<<gridSize, BLOCK_SIZE>>>(sweepFactors, fn);
@@ -202,7 +200,7 @@ namespace Sonsode {
 			size_t gridSizeY;
 			dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
 			
-			//Around X
+			//Прогонка по X
 			gridSizeX = GetBlockCount(fn.dimY());
 			gridSizeY = GetBlockCount(fn.dimZ());
 			
@@ -210,7 +208,7 @@ namespace Sonsode {
 			Sonsode::Kernels::Kernel_ImplicitSweepAroundX_3D_GPUlineDivide<<<dim3(gridSizeX, gridSizeY), threads>>>(sweepFactors, fn);
 			fn.gpu().Synchronize();
 
-			//Around Y
+			//Прогонка по Y
 			gridSizeX = GetBlockCount(fn.dimX());
 			gridSizeY = GetBlockCount(fn.dimZ());
 
@@ -218,7 +216,7 @@ namespace Sonsode {
 			Sonsode::Kernels::Kernel_ImplicitSweepAroundY_3D_GPUlineDivide<<<dim3(gridSizeX, gridSizeY), threads>>>(sweepFactors, fn);
 			fn.gpu().Synchronize();
 
-			//Around Z
+			//Прогонка по Z
 			gridSizeX = GetBlockCount(fn.dimX());
 			gridSizeY = GetBlockCount(fn.dimY());
 
@@ -229,6 +227,7 @@ namespace Sonsode {
 		
 		template<class FunctorType>
 		void ImplicitSweep_3D_GPU_blockDivide(DeviceData3D<SweepFactors<float>> sweepFactors, FunctorType fn) {
+			throw std::exception("Not implemented");
 		}
 
 		#pragma endregion

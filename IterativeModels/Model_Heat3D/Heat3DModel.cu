@@ -55,21 +55,19 @@ namespace Heat3D {
 
 	#pragma endregion
 
-	void Heat3DModel::InitSweep(bool useGpu) throw (std::string) {
+	void Heat3DModel::InitSweep(bool useGpu) {
 		if (!useGpu && !isSweepCpuInit) {
-			//Init CPU sweep
 			sf_h = HostData3D<SweepFactors<float>>(_t.dimX(), _t.dimY(), _t.dimZ());
 			isSweepCpuInit = true;
 		}
 
 		if (useGpu && !isSweepGpuInit && isGpuOn()) {
-			//Init GPU sweep
 			sf_d = DeviceData3D<SweepFactors<float>>(_t_dev.gpu(), _t_dev.dimX(), _t_dev.dimY(), _t_dev.dimZ());
 			isSweepGpuInit = true;
 		}
 	}
 
-	void Heat3DModel::DeinitSweep() throw (std::string) {
+	void Heat3DModel::DeinitSweep() {
 		if (isSweepCpuInit) {
 			sf_h.Erase();
 			isSweepCpuInit = false;

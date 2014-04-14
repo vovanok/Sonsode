@@ -166,7 +166,7 @@ namespace DataVisualization {
 
 					regions.push_back(Region(outerBoundaryPolygon, innerBoundaryPolygons));
 				}
-			} catch(exception e) {
+			} catch(std::exception e) {
 				throw DataVisualizationException(e);
 			}
 
@@ -202,7 +202,7 @@ namespace DataVisualization {
 
 				placemarkEls[0]->InsertEndChild(*mount);
 				document.SaveFile(fileName.c_str());
-			} catch (exception e) {
+			} catch(std::exception e) {
 				throw DataVisualizationException(e);
 			}
 		}

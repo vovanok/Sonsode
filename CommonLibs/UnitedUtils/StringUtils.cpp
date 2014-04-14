@@ -5,8 +5,8 @@ std::vector<std::string> StringUtils::SplitString(std::string strValue, std::str
 	if (strValue == "")
 		return parts;
 
-	std::size_t curCursorPosition = 0;
-	std::size_t newCursorPosition = 1;
+	size_t curCursorPosition = 0;
+	size_t newCursorPosition = 1;
 	while ((newCursorPosition != std::string::npos) && (curCursorPosition < strValue.length())) {
 		newCursorPosition = strValue.find_first_of(splitter, curCursorPosition);
 		std::string part = (newCursorPosition != std::string::npos)

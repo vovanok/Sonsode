@@ -1,20 +1,19 @@
 #include "IterativeModel.h"
 
-void IterativeModel::GpuOn() throw(std::string) {
-	
+void IterativeModel::GpuOn() {
 	if (isGpuOn())
 		return;
 
 	if (Sonsode::GpuDeviceFactory::GpuDevices().empty()) {
 		_isGpuOn = false;
-		throw "Is not allowed GPU devices";
+		throw std::exception("Is not allowed GPU devices");
 	}
 
 	try {
 		int orderNum = 0;
 		for (auto &gpu : Sonsode::GpuDeviceFactory::GpuDevices())
 			PrepareDataForGpu(*gpu, orderNum++);
-	} catch(std::string e) {
+	} catch(std::exception e) {
 		_isGpuOn = false;
 		throw e;
 	}
@@ -22,13 +21,13 @@ void IterativeModel::GpuOn() throw(std::string) {
 	_isGpuOn = true;
 }
 
-void IterativeModel::GpuOff() throw(std::string) {
+void IterativeModel::GpuOff() {
 	if (!isGpuOn())
 		return;
 
 	try {
 		FreeDataForGpus();
-	} catch(std::string e) {
+	} catch(std::exception e) {
 		_isGpuOn = false;
 		throw e;
 	}
@@ -36,16 +35,16 @@ void IterativeModel::GpuOff() throw(std::string) {
 	_isGpuOn = false;
 };
 	
-void IterativeModel::NextIteration(std::string methodName) throw(std::string) {
+void IterativeModel::NextIteration(std::string methodName) {
 	double time;
 	size_t iterNumber;
 
 	NextIteration(methodName, time, iterNumber);
 }
 
-void IterativeModel::NextIteration(std::string methodName, double& time, size_t& iterNumber) throw(std::string) {
+void IterativeModel::NextIteration(std::string methodName, double& time, size_t& iterNumber) {
 	if (CalculationMethods.count(methodName) <= 0)
-		throw "Calculation method not found";
+		throw std::exception("Calculation method not found");
 
 	tm.Begin();
 	CalculationMethods[methodName]();

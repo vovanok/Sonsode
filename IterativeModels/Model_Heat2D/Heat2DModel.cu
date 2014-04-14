@@ -24,12 +24,12 @@ namespace Heat2D {
 			_t_dev.PutTo(_t);
 	}
 
-	void Heat2DModel::PrepareDataForGpu(const Sonsode::GpuDevice &gpu, size_t orderNumber) throw(std::string) {
+	void Heat2DModel::PrepareDataForGpu(const GpuDevice &gpu, size_t orderNumber) {
 		_t_dev = DeviceData2D<float>(gpu, _t);
 		fnGPU = Heat2DFunctor<DeviceData2D<float>>(a(), h(), tau(), _t_dev);
 	}
 
-	void Heat2DModel::FreeDataForGpus() throw(std::string) {
+	void Heat2DModel::FreeDataForGpus() {
 		_t_dev.Erase();
 	}
 
@@ -80,21 +80,19 @@ namespace Heat2D {
 
 	#pragma endregion
 
-	void Heat2DModel::InitSweep(bool useGpu) throw (std::string) {
+	void Heat2DModel::InitSweep(bool useGpu) {
 		if (!useGpu && !isSweepCpuInit) {
-			//Init CPU sweep
 			sf_h = HostData2D<SweepFactors<float>>(_t.dimX(), _t.dimY());
 			isSweepCpuInit = true;
 		}
 
 		if (useGpu && !isSweepGpuInit && isGpuOn()) {
-			//Init GPU sweep
 			sf_d = DeviceData2D<SweepFactors<float>>(_t_dev.gpu(), _t_dev.dimX(), _t_dev.dimY());
 			isSweepGpuInit = true;
 		}
 	}
 
-	void Heat2DModel::DeinitSweep() throw (std::string) {
+	void Heat2DModel::DeinitSweep() {
 		if (isSweepCpuInit) {
 			sf_h.Erase();
 			isSweepCpuInit = false;

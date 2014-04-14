@@ -123,6 +123,7 @@
     <ClInclude Include="HostData.hpp" />
     <ClInclude Include="HostDataPrinter.hpp" />
     <ClInclude Include="SonsodeCommon.h" />
+    <ClInclude Include="SonsodeException.h" />
     <ClInclude Include="Vectors.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

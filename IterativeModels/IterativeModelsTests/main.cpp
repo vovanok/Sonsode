@@ -1,16 +1,12 @@
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <sstream>
 #include <Windows.h>
-
 #include "GraphicMgr.h"
 #include "IterativeModel.h"
 #include "InitRoutines.h"
-#include "Tests.h"
 #include "CapacityTests.h"
-
-//#include <algorithm>
-#include <ctime>
-#include <sstream>
 #include "Geometry.hpp"
 #include "Region.h"
 #include "KmlMgr.h"
@@ -24,13 +20,6 @@ using namespace DataVisualization::Graphic;
 using namespace DataVisualization::Geometry;
 using namespace OilSpill;
 using namespace ForestFire;
-
-//using DataVisualization::Graphic::GraphicMgr;
-//using DataVisualization::Geometry::Point;
-//using DataVisualization::Geometry::Rect;
-//using DataVisualization::Graphic::CameraRotateDirection;
-//using DataVisualization::Graphic::CameraZoomDirection;
-//using DataVisualization::Geometry::Vectorizator;
 
 IterativeModel *model;
 GraphicMgr* grEngine = 0;
@@ -109,8 +98,8 @@ void NextModelIteration(std::string methodName) {
 		model->NextIteration(methodName, time, iterNumber);
 
 		std::cout << methodName << ": " << iterNumber << ", время: " << time << std::endl;
-	} catch(std::string e) {
-		std::cout << e << std::endl;
+	} catch(std::exception e) {
+		std::cout << e.what() << std::endl;
 	}
 }
 
@@ -131,25 +120,10 @@ void CloseApplication() {
 }
 
 BOOL WINAPI ConsoleHandler(DWORD CEvent) {
-    switch(CEvent) {
-		//case CTRL_C_EVENT: 
-		//	logMsg << "CTRL_C_EVENT\n";
-		//	break;
-		//case CTRL_BREAK_EVENT:
-		//	logMsg << "CTRL_BREAK_EVENT\n";
-		//	break;
-		//case CTRL_LOGOFF_EVENT:
-		//	logMsg << "CTRL_LOGOFF_EVENT\n";
-		//	break;
-		////case CTRL_SHUTDOWN_EVENT: break;
-		//case CTRL_SHUTDOWN_EVENT:
-		//	logMsg << "CTRL_SHUTDOWN_EVENT\n";
-		//	break;
-		case CTRL_CLOSE_EVENT:
-			CloseApplication();
-			break;
-    }
-    return TRUE;
+	if (CEvent == CTRL_CLOSE_EVENT)
+		CloseApplication();
+
+  return TRUE;
 }
 
 void GetButtonForManageIteration(size_t methodOrderNum, std::string& singleIterationButton, std::string& processIterationsButton) {
@@ -205,8 +179,8 @@ void StartUiApp(int argc, char ** argv) {
 		model = InitRoutines::GetModelByUserChange();
 		if (model == 0)
 			CloseApplication();
-	} catch (std::string e) {
-		std::cout << "Ошибка получения прототипа модели: " << e << std::endl;
+	} catch(std::exception e) {
+		std::cout << "Ошибка получения прототипа модели: " << e.what() << std::endl;
 		return;
 	}
 	
@@ -460,11 +434,11 @@ void ForestFireKml(int argc, char ** argv) {
 		grEngine->Run();
 #pragma endregion
 
-	} catch (DataVisualization::DataVisualizationException e) {
+	} catch(DataVisualization::DataVisualizationException e) {
 		std::cout << "Ошибка в модуле визуализации: " << e.what() << std::endl;
-	} catch (std::string e) {
-		std::cout << "Ошибка в вычислениях: "	<< e << std::endl;
-	} catch (std::exception e) {
+	} catch(Sonsode::SonsodeException e) {
+		std::cout << "Ошибка в вычислениях: "	<< e.what() << std::endl;
+	} catch(std::exception e) {
 		std::cout << "Неизвестная ошибка: " << e.what() << std::endl;
 	}
 }
@@ -613,11 +587,11 @@ void OilSpillageKml(int argc, char ** argv) {
 		grEngine->Run();
 #pragma endregion
 
-	} catch (DataVisualization::DataVisualizationException e) {
+	} catch(DataVisualization::DataVisualizationException e) {
 		std::cout << "Ошибка в модуле визуализации: " << e.what() << std::endl;
-	} catch (std::string e) {
-		std::cout << "Ошибка в вычислениях: "	<< e << std::endl;
-	} catch (std::exception e) {
+	} catch(Sonsode::SonsodeException e) {
+		std::cout << "Ошибка в вычислениях: "	<< e.what() << std::endl;
+	} catch(std::exception e) {
 		std::cout << "Неизвестная ошибка: " << e.what() << std::endl;
 	}
 }

@@ -12,7 +12,6 @@ namespace Heat2D {
 		using Sonsode::GpuDevice;
 		using Sonsode::GpuDeviceFactory;
 
-		//Базовый функтор для модели теплопроводности
 		template<class DataKind>
 		class Heat2DFunctor {
 		protected:
@@ -30,7 +29,7 @@ namespace Heat2D {
 			__host__ __device__ size_t dimY() { return _data.dimY(); }
 	
 			GpuDevice& gpu() const {
-				throw "GPU property on CPU functor failed";
+				throw std::exception("GPU property on CPU functor failed");
 			}
 
 			__host__ __device__ float Formula(size_t x, size_t y, float s, float l , float r, float u, float d) {

@@ -6,9 +6,9 @@
 
 using namespace Heat2D;
 
-class HeatConductivity2DModelTest : public Heat2DModel, public IPresentable {
+class Heat2DTestModel : public Heat2DModel, public IPresentable {
 public:
-	HeatConductivity2DModelTest(HostData2D<float> t, float h, float a, float tau)
+	Heat2DTestModel(HostData2D<float> t, float h, float a, float tau)
 			: Heat2DModel(t, h, a, tau),
 				cs(Grid3DCoordSys(Vector3D<size_t>(t.dimX(), 1, t.dimY()))),
 				cp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 200.0f)) {

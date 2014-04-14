@@ -13,40 +13,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AirFlowDistributionModelTest.h">
-      <Filter>ModelTests</Filter>
-    </ClInclude>
-    <ClInclude Include="FireSpreadSimpleModelTest.h">
-      <Filter>ModelTests</Filter>
-    </ClInclude>
-    <ClInclude Include="HeatConductivity3DModelTest.h">
-      <Filter>ModelTests</Filter>
-    </ClInclude>
     <ClInclude Include="InitRoutines.h">
       <Filter>Init</Filter>
-    </ClInclude>
-    <ClInclude Include="OilSpillageImprovedModelTest.h">
-      <Filter>ModelTests</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests.h">
-      <Filter>Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="CuTests.h">
-      <Filter>Tests</Filter>
     </ClInclude>
     <ClInclude Include="CapacityTests.h">
       <Filter>Tests</Filter>
     </ClInclude>
-    <ClInclude Include="HeatConductivity2DModelTest.h">
-      <Filter>ModelTests</Filter>
-    </ClInclude>
     <ClInclude Include="FireKmlVisualizator.h" />
     <ClInclude Include="OilKmlVisualizator.h" />
+    <ClInclude Include="ForestFireTestModel.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="AirFlowTestModel.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="Heat2DTestModel.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="Heat3DTestModel.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
+    <ClInclude Include="OilSpillTestModel.h">
+      <Filter>ModelTests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tests.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
     <ClCompile Include="InitRoutines.cpp">
       <Filter>Init</Filter>
     </ClCompile>
@@ -54,10 +45,5 @@
     <ClCompile Include="CapacityTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="CuTests.cu">
-      <Filter>Tests</Filter>
-    </CudaCompile>
   </ItemGroup>
 </Project>

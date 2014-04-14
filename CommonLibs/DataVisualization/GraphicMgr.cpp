@@ -51,7 +51,7 @@ namespace DataVisualization {
 		//constructor & destructor
 		GraphicMgr::GraphicMgr() {
 			wndHdlr = 0;
-			SetVisibilityArea(-30, 30, 30, -30);//-20, 20, 20, -20);
+			SetVisibilityArea(-30, 30, 30, -30);
 		}
 
 		GraphicMgr::~GraphicMgr() {
@@ -76,7 +76,7 @@ namespace DataVisualization {
 			isRun = false;
 			RegisterPreDrawHandler(EmptyFunc);
 
-			glClearColor(1, 1, 1, 1);//0, 0, 0, 1);///!!!
+			glClearColor(1, 1, 1, 1);
 
 			glEnable(GL_DEPTH_TEST);
 

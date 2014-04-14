@@ -43,8 +43,8 @@ namespace Heat3D {
 		void CalculationMethod_GPU_GaussSeidel_Direct();
 		void CalculationMethod_GPU_Sweep_LineDevide();
 
-		void InitSweep(bool useGpu) throw (std::string);
-		void DeinitSweep() throw (std::string);
+		void InitSweep(bool useGpu);
+		void DeinitSweep();
 	public:
 		Heat3DModel(HostData3D<float> t, float h, float a, float tau);
 		~Heat3DModel() {

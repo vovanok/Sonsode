@@ -13,9 +13,9 @@ namespace Sonsode {
 		__host__ __device__ T CalculateL(const T& prevL, const T& alpha, const T& beta, const T& gamma);
 		__host__ __device__ T CalculateM(const T& prevL, const T& prevM, const T& q, const T& alpha, const T& beta, const T& gamma);
 	};
+}
 
-	#pragma region Implementation
-
+namespace Sonsode {
 	template<class T> SweepFactors<T> SweepFactors<T>::GetNextFactors(const T& q, const T& alpha, const T& beta, const T& gamma) {
 		return SweepFactors<T>(CalculateL(L, alpha, beta, gamma), CalculateM(L, M, q, alpha, beta, gamma));
 	}
@@ -27,6 +27,4 @@ namespace Sonsode {
 	template<class T> T SweepFactors<T>::CalculateM(const T& prevL, const T& prevM, const T& q, const T& alpha, const T& beta, const T& gamma) {
 		return (q - alpha * prevM) / (beta + alpha * prevL);
 	}
-
-	#pragma endregion
 };

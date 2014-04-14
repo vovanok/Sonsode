@@ -21,7 +21,7 @@ namespace AirFlow {
 			__device__ __host__ size_t dimZ() { return _data.dimZ(); }
 
 			GpuDevice& gpu() const {
-				throw "GPU property on CPU functor failed";
+				throw std::exception("GPU property on CPU functor failed");
 			}
 		
 		protected:

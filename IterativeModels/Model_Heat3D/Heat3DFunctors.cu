@@ -28,7 +28,7 @@ namespace Heat3D {
 			__host__ __device__ size_t dimZ() { return _data.dimZ(); }
 
 			GpuDevice& gpu() const {
-				throw "GPU property on CPU functor failed";
+				throw std::exception("GPU property on CPU functor failed");
 			}
 
 			__host__ __device__ float Formula(size_t x, size_t y, size_t z, float s, float l, float r, float f, float n, float u, float d) {

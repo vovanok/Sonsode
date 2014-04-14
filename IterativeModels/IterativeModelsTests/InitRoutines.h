@@ -2,32 +2,33 @@
 
 #include <iostream>
 #include "IterativeModel.h"
-#include "FireSpreadSimpleModelTest.h"
-#include "HeatConductivity3DModelTest.h"
-#include "HeatConductivity2DModelTest.h"
-//#include "HeatConductivitySweepModelTest.h"
-//#include "ParticlesModelTest.h"
-//#include "OilSpillageModelTest.h"
-#include "AirFlowDistributionModelTest.h"
-//#include "FireSpread3DModelTest.h"
-#include "OilSpillageImprovedModelTest.h"
-//#include "Model_ExperimentalTest.h"
+#include "ForestFireTestModel.h"
+#include "Heat2DTestModel.h"
+#include "Heat3DTestModel.h"
+#include "AirFlowTestModel.h"
+#include "OilSpillTestModel.h"
 
 namespace InitRoutines {
-	//ParticlesModelTest *GetInitedParticlesModel();
-	HeatConductivity2DModelTest* GetInitedHeatConductivityModel();
-	HeatConductivity2DModelTest* GetInitedHeatConductivityModel(size_t dimX, size_t dimY);
-	HeatConductivity3DModelTest* GetInitedHeatConductivity3DModel();
-	HeatConductivity3DModelTest* GetInitedHeatConductivity3DModel(size_t dimX, size_t dimY, size_t dimZ);
-	FireSpreadSimpleModelTest* GetInitedFireSpreadSimpleModel();
-	FireSpreadSimpleModelTest* GetInitedFireSpreadSimpleModel(size_t dimX, size_t dimY);
-	FireSpreadSimpleModelTest *GetInitedFireSpreadModelTest();
-	AirFlowDistributionModelTest* GetInitedAirFlowDistributionModel();
-	AirFlowDistributionModelTest* GetInitedAirFlowDistributionModel(size_t dimX, size_t dimY, size_t dimZ);
-	//OilSpillageModelTest* GetInitedOilSpillageModel();
-	//FireSpread3DModelTest* GetInitedFireSpread3DModel();
-	OilSpillageImprovedModelTest* GetInitedOilSpillageImprovedModel();
-	OilSpillageImprovedModelTest* GetInitedOilSpillageImprovedModel(size_t dimX, size_t dimY);
+	//Инициализирует и возвращает модель теплораспределения в пластине
+	Heat2DTestModel* GetInitedHeat2D();
+	Heat2DTestModel* GetInitedHeat2D(size_t dimX, size_t dimY);
 
+	//Инициализирует и возвращает модель теплораспределения в объеме
+	Heat3DTestModel* GetInitedHeat3D();
+	Heat3DTestModel* GetInitedHeat3D(size_t dimX, size_t dimY, size_t dimZ);
+
+	//Инициализирует и возвращает модель распространения пожара
+	ForestFireTestModel* GetInitedForestFire();
+	ForestFireTestModel* GetInitedForestFire(size_t dimX, size_t dimY);
+
+	//Инициализирует и возвращает модель распределения температурных потоков
+	AirFlowTestModel* GetInitedAirFlow();
+	AirFlowTestModel* GetInitedAirFlow(size_t dimX, size_t dimY, size_t dimZ);
+
+	//Инициализирует и возвращает модель разлива нефти по водной поверхности
+	OilSpillTestModel* GetInitedOilSpill();
+	OilSpillTestModel* GetInitedOilSpill(size_t dimX, size_t dimY);
+
+	//Получает модель в зависимости от выбора пользователя
 	IterativeModel *GetModelByUserChange();
 }

@@ -97,33 +97,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AirFlowDistributionModelTest.h" />
-    <ClInclude Include="CuTests.h" />
+    <ClInclude Include="AirFlowTestModel.h" />
     <ClInclude Include="FireKmlVisualizator.h" />
-    <ClInclude Include="FireSpreadSimpleModelTest.h" />
-    <ClInclude Include="HeatConductivity3DModelTest.h" />
-    <ClInclude Include="HeatConductivity2DModelTest.h" />
+    <ClInclude Include="ForestFireTestModel.h" />
+    <ClInclude Include="Heat3DTestModel.h" />
+    <ClInclude Include="Heat2DTestModel.h" />
     <ClInclude Include="InitRoutines.h" />
     <ClInclude Include="OilKmlVisualizator.h" />
-    <ClInclude Include="OilSpillageImprovedModelTest.h" />
-    <ClInclude Include="Tests.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
+    <ClInclude Include="OilSpillTestModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapacityTests.h" />
     <ClCompile Include="InitRoutines.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CapacityTests.cpp" />
-    <ClCompile Include="Tests.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="CuTests.cu">
-      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_11,sm_11</CodeGeneration>
-      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">compute_11,sm_11</CodeGeneration>
-      <Include Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</Include>
-      <Include Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">%(AdditionalIncludeDirectories)</Include>
-    </CudaCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

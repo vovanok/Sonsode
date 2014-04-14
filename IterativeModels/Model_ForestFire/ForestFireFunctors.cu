@@ -21,7 +21,7 @@ namespace ForestFire {
 			__host__ __device__ size_t dimY() { return _data.dimY(); }
 
 			GpuDevice& gpu() const {
-				throw "GPU property on CPU functor failed";
+				throw std::exception("GPU property on CPU functor failed");
 			}
 
 		protected:

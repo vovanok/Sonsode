@@ -17,7 +17,7 @@ enum class ViewMode {
 	T_SPACE = 2
 };
 
-class AirFlowDistributionModelTest : public AirFlowModel, public IPresentable {
+class AirFlowTestModel : public AirFlowModel, public IPresentable {
 private:
 	VectorViewType vectorsView;
 	ViewMode viewMode;
@@ -33,7 +33,7 @@ private:
 public:
 	Vector3D<size_t> curPlane;
 	
-	AirFlowDistributionModelTest(AirFlowConsts consts, AirFlowDataH data)
+	AirFlowTestModel(AirFlowConsts consts, AirFlowDataH data)
 			: AirFlowModel(consts, data),
 				roCp(ColorPalette(Color(0.0f, 0.0f, 0.0f, 1.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), 1.2f, 1.3f)),
 				tCp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 500.0f)),
@@ -52,7 +52,7 @@ public:
 		viewMode = ViewMode::NONE;
 	}
 
-	~AirFlowDistributionModelTest() {
+	~AirFlowTestModel() {
 		vectors.Erase();
 		buffer.Erase();
 	}

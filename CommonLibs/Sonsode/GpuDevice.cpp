@@ -17,7 +17,7 @@ namespace Sonsode {
 
 	void GpuDevice::CheckErr(const cudaError_t &error) {
 		if (error != cudaSuccess)
-				throw std::string(cudaGetErrorString(error));
+				throw SonsodeException(cudaGetErrorString(error));
 	}
 
 	void GpuDevice::Initialize(size_t id, bool isFake) {

@@ -6,11 +6,11 @@
 
 using namespace Heat3D;
 
-class HeatConductivity3DModelTest : public Heat3DModel, public IPresentable {
+class Heat3DTestModel : public Heat3DModel, public IPresentable {
 public:
 	Vector3D<size_t> curPlane;
 
-	HeatConductivity3DModelTest(HostData3D<float> t, float h, float a, float tau)
+	Heat3DTestModel(HostData3D<float> t, float h, float a, float tau)
 			: Heat3DModel(t, h, a, tau),
 				cs(Grid3DCoordSys(Vector3D<size_t>(t.dimX(), t.dimY(), t.dimZ()))),
 				cp(ColorPalette(Color(0.0f, 0.0f, 1.0f, 1.0f), Color(1.0f, 0.0f, 0.0f, 1.0f), 0.0f, 500.0f)) {

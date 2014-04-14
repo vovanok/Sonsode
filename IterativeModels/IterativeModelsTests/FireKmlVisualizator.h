@@ -85,30 +85,6 @@ public:
 		glLineWidth(1);
 		glDisable(GL_LINE_STIPPLE);
 
-		////Draw grid
-		//glBegin(GL_POINTS);
-
-		//for (size_t x = 0; x < isForestField.dimX(); x++) {
-		//	for (size_t y = 0; y < isForestField.dimY(); y++) {
-		//		//if (fireGrid->IsFireBoundNode(curInd))
-		//			//glColor3f(1, 1, 1);
-		//		//else 
-		//		if (isFireField(x, y) && isForestField(x, y))
-		//			glColor3f(1.0f, 0.0f, 1.0f);
-		//		else if (isFireField(x, y))
-		//			glColor3f(1.0f, 0.0f, 0.0f);
-		//		else if (isForestField(x, y))
-		//			glColor3f(0.0f, 1.0f, 0.0f);
-		//		else
-		//			glColor3f(0.5f, 0.5f, 0.5f);
-
-		//		Vertex(x * h, y * h);
-		//	}
-		//}
-		//
-		//glEnd();
-
-
 		glLineWidth(4);
 		//Draw forecast regions
 		for (auto forecastRegion : forecastRegions) {
@@ -124,12 +100,6 @@ public:
 			for (auto vertex : forecastRegion.outerBounder.vertexes)
 				Vertex(vertex);
 			glEnd();
-
-			////Draw start vertex
-			//glColor3f(0.9f, 0.7f, 0.0f);
-			//glBegin(GL_POINTS);
-			//Vertex(forecastRegion.vertexes[0]);
-			//glEnd();
 		}
 		glLineWidth(1);
 	}

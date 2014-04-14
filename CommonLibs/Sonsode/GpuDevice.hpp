@@ -5,6 +5,7 @@
 #include <map>
 #include <cuda_runtime.h>
 #include "SonsodeCommon.h"
+#include "SonsodeException.h"
 
 namespace Sonsode {
 	const size_t DEFAULT_GPU_ID = 0;

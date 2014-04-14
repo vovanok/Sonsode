@@ -87,8 +87,8 @@ namespace OilSpill {
 		IslandResolver<OilSpillDataD> islandResolverGPU;
 
 	protected:
-		virtual void PrepareDataForGpu(const GpuDevice &gpuDevice, size_t orderNumber) throw (std::string);
-		virtual void FreeDataForGpus() throw (std::string);
+		virtual void PrepareDataForGpu(const GpuDevice &gpuDevice, size_t orderNumber);
+		virtual void FreeDataForGpus();
 
 		void CalculationMethod_CPU();
 		void CalculationMethod_GPU();

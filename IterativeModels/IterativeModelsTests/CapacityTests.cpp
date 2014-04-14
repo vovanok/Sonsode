@@ -16,10 +16,10 @@ namespace CapacityTests {
 	
 		std::cout << "Тест производительности 2D модели теплопроводности. Метод: " << methodName << std::endl;
 
-		HeatConductivity2DModelTest *model;
+		Heat2DTestModel* model;
 		
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
-			model = InitRoutines::GetInitedHeatConductivityModel(dim, dim);
+			model = InitRoutines::GetInitedHeat2D(dim, dim);
 		
 			try {
 				sumTime = 0;
@@ -32,8 +32,8 @@ namespace CapacityTests {
 
 				std::cout << "Размерность задачи: " << dim << "x" << dim 
 					<< ".Среднее время на итерацию: " << sumTime / countIteration << "\n";
-			} catch(std::string e) {
-				std::cout << e << std::endl;
+			} catch(std::exception e) {
+				std::cout << e.what() << std::endl;
 			}
 
 			delete model;
@@ -50,10 +50,10 @@ namespace CapacityTests {
 	
 		std::cout << "Тест производительности 3D модели теплопроводности. Метод: " << methodName << std::endl;
 
-		HeatConductivity3DModelTest *model;
+		Heat3DTestModel* model;
 
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
-			model = InitRoutines::GetInitedHeatConductivity3DModel(dim, dim, dim);
+			model = InitRoutines::GetInitedHeat3D(dim, dim, dim);
 		
 			try {
 				sumTime = 0;
@@ -66,8 +66,8 @@ namespace CapacityTests {
 
 				std::cout << "Размерность задачи: " << dim << "x" << dim << "x" << dim
 					<< ".Среднее время на итерацию: " << sumTime / countIteration << "\n";
-			} catch(std::string e) {
-				std::cout << e << std::endl;
+			} catch(std::exception e) {
+				std::cout << e.what() << std::endl;
 			}
 
 			delete model;
@@ -84,10 +84,10 @@ namespace CapacityTests {
 	
 		std::cout << "Тест производительности 2D модели нефтеразлива. Метод: " << methodName << std::endl;
 
-		OilSpillageImprovedModelTest *model;
+		OilSpillTestModel* model;
 		
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
-			model = InitRoutines::GetInitedOilSpillageImprovedModel(dim, dim);
+			model = InitRoutines::GetInitedOilSpill(dim, dim);
 		
 			try {
 				sumTime = 0;
@@ -100,8 +100,8 @@ namespace CapacityTests {
 
 				std::cout << "Размерность задачи: " << dim << "x" << dim 
 					<< ".Среднее время на итерацию: " << sumTime / countIteration << "\n";
-			} catch(std::string e) {
-				std::cout << e << std::endl;
+			} catch(std::exception e) {
+				std::cout << e.what() << std::endl;
 			}
 
 			delete model;
@@ -118,10 +118,10 @@ namespace CapacityTests {
 	
 		std::cout << "Тест производительности 3D модели воздушных потоков. Метод: " << methodName << std::endl;
 
-		AirFlowDistributionModelTest* model;
+		AirFlowTestModel* model;
 		
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
-			model = InitRoutines::GetInitedAirFlowDistributionModel(dim, dim, dim);
+			model = InitRoutines::GetInitedAirFlow(dim, dim, dim);
 		
 			try {
 				sumTime = 0;
@@ -134,8 +134,8 @@ namespace CapacityTests {
 
 				std::cout << "Размерность задачи: " << dim << "x" << dim << "x" << dim 
 					<< ".Среднее время на итерацию: " << sumTime / countIteration << "\n";
-			} catch(std::string e) {
-				std::cout << e << std::endl;
+			} catch(std::exception e) {
+				std::cout << e.what() << std::endl;
 			}
 
 			delete model;
@@ -152,10 +152,10 @@ namespace CapacityTests {
 		double sumTimeGPU;
 		size_t iterationNumber;
 	
-		FireSpreadSimpleModelTest *model;
+		ForestFireTestModel* model;
 
 		for (int dim = 100; dim <= 2000; dim += 100) {
-			model = InitRoutines::GetInitedFireSpreadSimpleModel(dim, dim);
+			model = InitRoutines::GetInitedForestFire(dim, dim);
 
 			model->GpuOff();
 			sumTimeCPU = 0.0f;
@@ -175,15 +175,12 @@ namespace CapacityTests {
 				<< ". CPU: " << sumTimeCPU / countIteration
 				<< "; GPU: " << sumTimeGPU / countIteration << std::endl;
 
-			//model->DeInitGpu();
-
 			delete model;
 			model = NULL;
 		}
 
 		std::cout << "Расчет закончен\n";
 	}
-
 
 	void FireSpreadRealAndModelTimeRelation(size_t maxRealTimeSec, size_t stepRealTimeSec,
 			size_t startDim, size_t finishDim, size_t stepDim, std::string methodName) {
@@ -193,10 +190,10 @@ namespace CapacityTests {
 	
 		std::cout << "Тест производительности модели лесного пожара. Метод: " << methodName << std::endl;
 
-		FireSpreadSimpleModelTest *model;
+		ForestFireTestModel *model;
 		
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
-			model = InitRoutines::GetInitedFireSpreadSimpleModel(dim, dim);
+			model = InitRoutines::GetInitedForestFire(dim, dim);
 			std::cout << dim << "x" << dim;
 
 			float calculationTime = 0.0f;
@@ -211,8 +208,8 @@ namespace CapacityTests {
 						std::cout << " " << std::fixed << std::setprecision(4) << calculationTime;
 						nextModelingTimeFrontier += stepRealTimeSec;
 					}
-				} catch(std::string e) {
-					std::cout << std::endl << e << std::endl;
+				} catch(std::exception e) {
+					std::cout << std::endl << e.what() << std::endl;
 				}
 			}
 
@@ -235,7 +232,7 @@ namespace CapacityTests {
 		OilSpillModel* model;
 		
 		for (size_t dim = startDim; dim <= finishDim; dim += stepDim) {
-			model = InitRoutines::GetInitedOilSpillageImprovedModel(dim, dim);
+			model = InitRoutines::GetInitedOilSpill(dim, dim);
 			std::cout << dim << "x" << dim;
 
 			float calculationTime = 0.0f;
@@ -250,8 +247,8 @@ namespace CapacityTests {
 						std::cout << " " << std::fixed << std::setprecision(4) << calculationTime;
 						nextModelingTimeFrontier += modelingTimeStepSec;
 					}
-				} catch(std::string e) {
-					std::cout << std::endl << e << std::endl;
+				} catch(std::exception e) {
+					std::cout << std::endl << e.what() << std::endl;
 				}
 			}
 
