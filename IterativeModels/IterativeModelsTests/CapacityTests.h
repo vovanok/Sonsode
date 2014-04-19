@@ -3,14 +3,12 @@
 #include "InitRoutines.h"
 
 namespace CapacityTests {
-	void HeatConductivity2D(size_t countIteration, size_t startDim, size_t finishDim, size_t stepDim, std::string methodName);
-	void HeatConductivity3D(size_t countIteration, size_t startDim, size_t finishDim, size_t stepDim, std::string methodName);
-	void OilSpillage(size_t countIteration, size_t startDim, size_t finishDim, size_t stepDim, std::string methodName);
-	void AirFlow(size_t countIteration, size_t startDim, size_t finishDim, size_t stepDim, std::string methodName);
-	void FireSpread();
+	void ModelPerfomanceTest2D(std::function<IterativeModel*(size_t, size_t)> modelGetter, std::string methodName,
+			size_t countIteration, size_t startDim, size_t finishDim, size_t stepDim);
 
-	void FireSpreadRealAndModelTimeRelation(size_t maxModelingTimeSec, size_t modelingTimeStepSec,
-			size_t startDim, size_t finishDim, size_t stepDim, std::string methodName);
-	void OilSpillageRealAndModelTimeRelation(size_t maxModelingTimeSec, size_t modelingTimeStepSec,
-			size_t startDim, size_t finishDim, size_t stepDim, std::string methodName);
+	void ModelPerfomanceTest3D(std::function<IterativeModel*(size_t, size_t, size_t)> modelGetter, std::string methodName,
+			size_t countIteration, size_t startDim, size_t finishDim, size_t stepDim);
+
+	void RealAndModelTimeRelation2D(std::function<IterativeModel*(size_t, size_t)> modelGetter, std::string methodName,
+		size_t maxTimeSec, size_t stepTimeSec, size_t beginDim, size_t endDim, size_t stepDim);
 }

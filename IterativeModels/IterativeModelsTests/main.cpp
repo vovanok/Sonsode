@@ -33,32 +33,135 @@ void OilSpillageKml(int argc, char ** argv);
 void main(int argc, char ** argv) {
 	setlocale(LC_ALL, "rus");
 
-	////Heat conductivity 2D test
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "cpu_gaussseidel");
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "cpu_sweep");
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "gpu_gaussseidel_direct");
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "gpu_gaussseidel_chess");
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "gpu_gaussseidel_withoutconflicts");
-	//CapacityTests::HeatConducivity2D(10, 100, 2000, 100, "gpu_gaussseidel_direct_overlay");
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "gpu_sweep_linedevide");
-	//CapacityTests::HeatConductivity2D(10, 100, 2000, 100, "gpu_sweep_blockdevide");
+	//#pragma region Heat2D perfomance
 
-	//Heat conductivity 3D test
-	//CapacityTests::HeatConductivity3D(10, 10, 400, 10, "cpu_gaussseidel");
-	//CapacityTests::HeatConductivity3D(10, 10, 400, 10, "gpu_gaussseidel_direct");
-	//CapacityTests::HeatConductivity3D(10, 10, 400, 10, "cpu_sweep");
-	//CapacityTests::HeatConductivity3D(10, 10, 400, 10, "gpu_sweep_linedevide");
+	//std::cout << "Heat conductivity 2D model perfomance test" << std::endl;
 
-	//CapacityTests::OilSpillage(10, 100, 1400, 100, "cpu");
-	//CapacityTests::OilSpillage(10, 100, 2000, 100, "gpu");
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"cpu_gaussseidel", 10, 100, 2000, 100);
 
-	//CapacityTests::FireSpreadRealAndModelTimeRelation(3600, 600, 500, 500, 100, "cpu");
-	//CapacityTests::FireSpreadRealAndModelTimeRelation(3600, 600, 400, 500, 100, "gpu");
-	//CapacityTests::OilSpillageRealAndModelTimeRelation(3600, 600, 100, 400, 100, "gpu");
-	//CapacityTests::OilSpillageRealAndModelTimeRelation(3600, 600, 300, 400, 100, "cpu");
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"cpu_sweep", 10, 100, 2000, 100);
 
-	//CapacityTests::AirFlow(10, 50, 190, 10, "cpu");
-	//CapacityTests::AirFlow(10, 150, 190, 10, "gpu");
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"gpu_gaussseidel_direct", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"gpu_gaussseidel_chess", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"gpu_gaussseidel_withoutconflicts", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"gpu_gaussseidel_direct_overlay", 10, 100, 2000, 100);
+	//
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"gpu_sweep_linedevide", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+	//	"gpu_sweep_blockdevide", 10, 100, 2000, 100);
+
+	//#pragma endregion
+
+	//#pragma region Heat3D perfomance
+
+	//std::cout << "Heat conductivity 3D model perfomance test" << std::endl;
+
+	//CapacityTests::ModelPerfomanceTest3D(
+	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
+	//	"cpu_gaussseidel", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest3D(
+	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
+	//	"gpu_gaussseidel_direct", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest3D(
+	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
+	//	"cpu_sweep", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest3D(
+	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
+	//	"gpu_sweep_linedevide", 10, 100, 2000, 100);
+
+	//#pragma endregion
+
+	//#pragma region Forest fire perfomance
+
+	//std::cout << "Forest fire model perfomance test" << std::endl;
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
+	//	"cpu", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
+	//	"gpu", 10, 100, 2000, 100);
+
+	//#pragma endregion
+
+	//#pragma region Oil spill perfomance
+
+	//std::cout << "Oil spill model perfomance test" << std::endl;
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
+	//	"cpu", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
+	//	"gpu", 10, 100, 2000, 100);
+
+	//#pragma endregion
+
+	//#pragma region Air flow perfomance
+
+	//std::cout << "Air flow model perfomance test" << std::endl;
+
+	//CapacityTests::ModelPerfomanceTest3D(
+	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedAirFlow(dimX, dimY, dimZ); },
+	//	"cpu", 10, 100, 2000, 100);
+
+	//CapacityTests::ModelPerfomanceTest3D(
+	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedAirFlow(dimX, dimY, dimZ); },
+	//	"gpu", 10, 100, 2000, 100);
+
+	//#pragma endregion
+
+	//#pragma region Forest fire real/model time
+
+	//std::cout << "Forest fire real and model time relation test" << std::endl;
+
+	//CapacityTests::RealAndModelTimeRelation2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
+	//	"cpu", 3600, 600, 100, 500, 100);
+
+	//CapacityTests::RealAndModelTimeRelation2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
+	//	"gpu", 3600, 600, 100, 500, 100);
+
+	//#pragma endregion
+
+	//#pragma region Oil spill real/model time
+
+	//std::cout << "Oil spill real and model time relation test" << std::endl;
+
+	//CapacityTests::RealAndModelTimeRelation2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
+	//	"cpu", 3600, 600, 100, 500, 100);
+
+	//CapacityTests::RealAndModelTimeRelation2D(
+	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
+	//	"gpu", 3600, 600, 100, 500, 100);
+
+	//#pragma endregion
 
 	StartUiApp(argc, argv);
 
