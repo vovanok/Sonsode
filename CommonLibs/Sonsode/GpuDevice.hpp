@@ -17,12 +17,12 @@ namespace Sonsode {
 		size_t _id;
 		bool _isFake;
 
-		GpuDevice();
-		explicit GpuDevice(size_t id);
-		explicit GpuDevice(bool isFake);
 		static void CheckErr(const cudaError_t &error);
 		void Initialize(size_t id, bool isFake);
 	public:
+		GpuDevice();
+		explicit GpuDevice(size_t id);
+		explicit GpuDevice(bool isFake);
 		bool operator == (const GpuDevice &compareGpu) const;
 		void SetAsCurrent() const;
 		template<class T> T *Malloc(const size_t countItems) const;

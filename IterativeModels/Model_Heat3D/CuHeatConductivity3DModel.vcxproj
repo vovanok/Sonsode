@@ -18,13 +18,14 @@
     <ProjectGuid>{9B009412-8D47-4A2E-96FE-E49C7E60DF4A}</ProjectGuid>
     <RootNamespace>CuHeatConductivity3DModel</RootNamespace>
     <ProjectName>Model_Heat3D</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -41,7 +42,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 5.5.props" />
+    <Import Project="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\extras\visual_studio_integration\MSBuildExtensions\CUDA 7.5.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -64,11 +65,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <CudaCompile>
-      <Include>..\CUDAunited;..\Utils;%(AdditionalIncludeDirectories)</Include>
-      <CodeGeneration>compute_11,sm_11</CodeGeneration>
+      <Include>..\..\CommonLibs\Sonsode</Include>
+      <CodeGeneration>compute_50,sm_50</CodeGeneration>
     </CudaCompile>
     <Lib>
-      <AdditionalDependencies>IterativeModeling.lib;DataCalculation.lib;UnitedUtils.lib;</AdditionalDependencies>
+      <AdditionalDependencies>IterativeModeling.lib;Sonsode.lib;UnitedUtils.lib;</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;</AdditionalLibraryDirectories>
@@ -80,7 +81,7 @@
       <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;</AdditionalLibraryDirectories>
     </CudaLink>
     <CudaLink>
-      <AdditionalDependencies>IterativeModeling.lib;DataCalculation.lib;UnitedUtils.lib;</AdditionalDependencies>
+      <AdditionalDependencies>IterativeModeling.lib;Sonsode.lib;UnitedUtils.lib;</AdditionalDependencies>
     </CudaLink>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">
@@ -139,6 +140,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 5.5.targets" />
+    <Import Project="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\extras\visual_studio_integration\MSBuildExtensions\CUDA 7.5.targets" />
   </ImportGroup>
 </Project>

@@ -30,110 +30,42 @@ void StartStopProcessModelIteration(std::string methodName);
 void ForestFireKml(int argc, char ** argv);
 void OilSpillageKml(int argc, char ** argv);
 
+void PerfomanceTestHeat2D(std::string methodName);
+void PerfomanceTestHeat3D(std::string methodName);
+void PerfomanceTestForestFire(std::string methodName);
+void PerfomanceTestOilSpill(std::string methodName);
+void PerfomanceTestAirFlow(std::string methodName);
+
 void main(int argc, char ** argv) {
 	setlocale(LC_ALL, "rus");
 
-	//#pragma region Heat2D perfomance
-
 	//std::cout << "Heat conductivity 2D model perfomance test" << std::endl;
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"cpu_gaussseidel", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"cpu_sweep", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"gpu_gaussseidel_direct", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"gpu_gaussseidel_chess", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"gpu_gaussseidel_withoutconflicts", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"gpu_gaussseidel_direct_overlay", 10, 100, 2000, 100);
-	//
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"gpu_sweep_linedevide", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
-	//	"gpu_sweep_blockdevide", 10, 100, 2000, 100);
-
-	//#pragma endregion
-
-	//#pragma region Heat3D perfomance
+	//PerfomanceTestHeat2D("cpu_gaussseidel");
+	//PerfomanceTestHeat2D("cpu_sweep");
+	//PerfomanceTestHeat2D("gpu_gaussseidel_direct");
+	//PerfomanceTestHeat2D("gpu_gaussseidel_chess");
+	//PerfomanceTestHeat2D("gpu_gaussseidel_withoutconflicts");
+	//PerfomanceTestHeat2D("gpu_gaussseidel_direct_overlay");
+	//PerfomanceTestHeat2D("gpu_sweep_linedevide");
+	//PerfomanceTestHeat2D("gpu_sweep_blockdevide");
 
 	//std::cout << "Heat conductivity 3D model perfomance test" << std::endl;
-
-	//CapacityTests::ModelPerfomanceTest3D(
-	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
-	//	"cpu_gaussseidel", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest3D(
-	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
-	//	"gpu_gaussseidel_direct", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest3D(
-	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
-	//	"cpu_sweep", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest3D(
-	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
-	//	"gpu_sweep_linedevide", 10, 100, 2000, 100);
-
-	//#pragma endregion
-
-	//#pragma region Forest fire perfomance
+	//PerfomanceTestHeat3D("cpu_gaussseidel");
+	//PerfomanceTestHeat3D("gpu_gaussseidel_direct");
+	//PerfomanceTestHeat3D("cpu_sweep");
+	//PerfomanceTestHeat3D("gpu_sweep_linedevide");
 
 	//std::cout << "Forest fire model perfomance test" << std::endl;
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
-	//	"cpu", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
-	//	"gpu", 10, 100, 2000, 100);
-
-	//#pragma endregion
-
-	//#pragma region Oil spill perfomance
+	//PerfomanceTestForestFire("cpu");
+	//PerfomanceTestForestFire("gpu");
 
 	//std::cout << "Oil spill model perfomance test" << std::endl;
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
-	//	"cpu", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest2D(
-	//	[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
-	//	"gpu", 10, 100, 2000, 100);
-
-	//#pragma endregion
-
-	//#pragma region Air flow perfomance
+	//PerfomanceTestOilSpill("cpu");
+	//PerfomanceTestOilSpill("gpu");
 
 	//std::cout << "Air flow model perfomance test" << std::endl;
-
-	//CapacityTests::ModelPerfomanceTest3D(
-	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedAirFlow(dimX, dimY, dimZ); },
-	//	"cpu", 10, 100, 2000, 100);
-
-	//CapacityTests::ModelPerfomanceTest3D(
-	//	[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedAirFlow(dimX, dimY, dimZ); },
-	//	"gpu", 10, 100, 2000, 100);
-
-	//#pragma endregion
+	//PerfomanceTestAirFlow("cpu");
+	//PerfomanceTestAirFlow("gpu");
 
 	//#pragma region Forest fire real/model time
 
@@ -174,6 +106,40 @@ void main(int argc, char ** argv) {
 
 	CloseApplication();
 }
+
+#pragma region Perfomance tests
+
+void PerfomanceTestHeat2D(std::string methodName) {
+	CapacityTests::ModelPerfomanceTest2D(
+		[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedHeat2D(dimX, dimY); },
+		methodName, 10, 100, 2000, 100);
+}
+
+void PerfomanceTestHeat3D(std::string methodName) {
+	CapacityTests::ModelPerfomanceTest3D(
+		[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedHeat3D(dimX, dimY, dimZ); },
+		methodName, 10, 100, 2000, 100);
+}
+
+void PerfomanceTestForestFire(std::string methodName) {
+	CapacityTests::ModelPerfomanceTest2D(
+		[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedForestFire(dimX, dimY); },
+		methodName, 10, 100, 2000, 100);
+}
+
+void PerfomanceTestOilSpill(std::string methodName) {
+	CapacityTests::ModelPerfomanceTest2D(
+		[](int dimX, int dimY) -> IterativeModel* { return InitRoutines::GetInitedOilSpill(dimX, dimY); },
+		methodName, 10, 100, 2000, 100);
+}
+
+void PerfomanceTestAirFlow(std::string methodName) {
+	CapacityTests::ModelPerfomanceTest3D(
+		[](int dimX, int dimY, int dimZ) -> IterativeModel* { return InitRoutines::GetInitedAirFlow(dimX, dimY, dimZ); },
+		methodName, 10, 100, 2000, 100);
+}
+
+#pragma endregion
 
 #pragma region Actions
 
@@ -373,7 +339,7 @@ float LattitudeCloserEquator(float latitude1, float latitude2) {
 	return latitude2;
 }
 
-Rect<float> MeterClearenceByGradusArea(const Rect<float>& gradusArea) {
+Rect<float> MeterClearenceByGradusArea(const Rect<float>& gradusArea, const Vector2D<float>& meterFactor) {
 	Rect<float> result(Point<float>(0.0f, 0.0f), Point<float>(0.0f, 0.0f));
 
 	float earthC = 2.0f * PI * EARTH_RADIUS;
@@ -381,8 +347,8 @@ Rect<float> MeterClearenceByGradusArea(const Rect<float>& gradusArea) {
 		1000.0f * (earthC * cosf(LattitudeCloserEquator(gradusArea.point1.y, gradusArea.point2.y) * (PI / 180.0f))) / 360.0f,
 		1000.0f * (earthC / 360.0f));
 
-	result.point2.x = abs(gradusArea.point1.x - gradusArea.point2.x) * oneGradInKm.x;// * 2.0f;
-	result.point2.y = abs(gradusArea.point1.y - gradusArea.point2.y) * oneGradInKm.y;// * 2.0f;
+	result.point2.x = abs(gradusArea.point1.x - gradusArea.point2.x) * oneGradInKm.x * meterFactor.x;
+	result.point2.y = abs(gradusArea.point1.y - gradusArea.point2.y) * oneGradInKm.y * meterFactor.y;
 
 	return result;
 }
@@ -428,7 +394,7 @@ vector<Region> GetForestFireForecast(const ForestFireConsts& consts,
 																		 float minFireTemperatureK, float modelingTimeSec, bool isUseGpu) {
 	//ѕолучение габаритов леса градусах и метрах
 	Rect<float> gradForestClearence = GetRegionsClearence(forestRegions);
-	Rect<float> meterForestClearence = MeterClearenceByGradusArea(gradForestClearence);
+	Rect<float> meterForestClearence = MeterClearenceByGradusArea(gradForestClearence, Vector2D<float>(2.0f, 2.0f));
 
 	//Ќормализаци€ координат между загруженными из файлов и более приемлемыми дл€ расчетов
 	NormalizeRegions(forestRegions, gradForestClearence, meterForestClearence);
@@ -557,7 +523,7 @@ vector<Region> GetOilSpillageForecast(const OilSpillConsts& consts,
 																			Rect<float>& meterClearence) {
 	//ѕолучение габаритов водоема в градусах и метрах
 	Rect<float> gradWaterClearence = GetRegionsClearence(waterRegions);
-	Rect<float> meterWaterClearence = MeterClearenceByGradusArea(gradWaterClearence);
+	Rect<float> meterWaterClearence = MeterClearenceByGradusArea(gradWaterClearence, Vector2D<float>(1.0f, 1.0f));
 
 	//!!!
 	meterClearence = meterWaterClearence;

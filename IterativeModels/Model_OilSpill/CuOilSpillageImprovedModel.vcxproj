@@ -18,12 +18,13 @@
     <ProjectGuid>{55417816-E3AC-4035-90CE-34E157D01902}</ProjectGuid>
     <RootNamespace>CuOilSpillageImprovedModel</RootNamespace>
     <ProjectName>Model_OilSpill</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'" Label="Configuration">
@@ -41,7 +42,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 5.5.props" />
+    <Import Project="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\extras\visual_studio_integration\MSBuildExtensions\CUDA 7.5.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -67,10 +68,18 @@
       <AdditionalDependencies>IterativeModeling.lib;DataCalculation.lib;UnitedUtils.lib;</AdditionalDependencies>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_11,sm_11</CodeGeneration>
+      <CodeGeneration>compute_50,sm_50</CodeGeneration>
       <Keep>false</Keep>
       <KeepDir>$(CudaIntDir)</KeepDir>
+      <Include>..\..\CommonLibs\Sonsode</Include>
     </CudaCompile>
+    <CudaLink>
+      <AdditionalDependencies>IterativeModeling.lib;Sonsode.lib;UnitedUtils.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);..\..\CommonLibs\Debug;</AdditionalLibraryDirectories>
+    </CudaLink>
+    <Lib>
+      <AdditionalLibraryDirectories>IterativeModeling.lib;Sonsode.lib;UnitedUtils.lib;</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CUDA_5_5|Win32'">
     <ClCompile>
@@ -131,6 +140,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 5.5.targets" />
+    <Import Project="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\extras\visual_studio_integration\MSBuildExtensions\CUDA 7.5.targets" />
   </ImportGroup>
 </Project>
